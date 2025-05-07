@@ -10,7 +10,7 @@ def graph_ListAktif_TotalHousehold():
         {
             "Kabupaten"            : get_Kabupaten_data(),
             "List Aktif"           : get_ListAktif_data(),
-            "Total Household"      : get_TotalHousehold_data(),
+            "List Non Aktif"       : get_ListNonAktif_data(),
         }
     )
 
@@ -22,15 +22,15 @@ def graph_ListAktif_TotalHousehold():
         .astype(int)  # gunakan int, bukan float
     )
 
-    dataPendidikan["Total Household"] = (
-        dataPendidikan["Total Household"]
+    dataPendidikan["List Non Aktif"] = (
+        dataPendidikan["List Non Aktif"]
         .astype(str)
         .str.replace(".", "", regex=False)
         .str.replace(",", "", regex=False)
         .astype(int)
     )
 
-    df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars=["List Aktif", "Total Household"], var_name="Kategori", value_name="Jumlah")
+    df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars=["List Aktif", "List Non Aktif"], var_name="Kategori", value_name="Jumlah")
 
     chart = alt.Chart(df_melted).mark_bar().encode(
         x=alt.X("Kabupaten:N", sort=None),
@@ -51,7 +51,7 @@ def graph_PortAvail_TotalPort():
         {
             "Kabupaten"            : get_Kabupaten_data(),
             "Port Available"       : get_PortAvail_data(),
-            "Total Port"           : get_TotalPort_data(),
+            "Port Unavailable"     : get_PortUnavail_data(),
         }
     )
 
@@ -63,15 +63,16 @@ def graph_PortAvail_TotalPort():
         .astype(int)  # gunakan int, bukan float
     )
 
-    dataPendidikan["Total Port"] = (
-        dataPendidikan["Total Port"]
+    dataPendidikan["Port Unavailable"] = (
+        dataPendidikan["Port Unavailable"]
         .astype(str)
-        .str.replace(".", "", regex=False)
-        .str.replace(",", "", regex=False)
-        .astype(int)
+        .str.replace(".", "", regex=False)  # hapus titik ribuan
+        .str.replace(",", "", regex=False)  # jaga-jaga kalau ada koma
+        .astype(int)  # gunakan int, bukan float
     )
 
-    df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars=["Port Available", "Total Port"], var_name="Kategori", value_name="Jumlah")
+
+    df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars=["Port Available", "Port Unavailable"], var_name="Kategori", value_name="Jumlah")
 
     chart = alt.Chart(df_melted).mark_bar().encode(
         x=alt.X("Kabupaten:N", sort=None),
@@ -84,7 +85,6 @@ def graph_PortAvail_TotalPort():
             alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
         ]
     ).properties(height=550)
-
     return st.altair_chart(chart, use_container_width=True)
 
 def graph_WifiShare():

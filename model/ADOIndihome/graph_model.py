@@ -20,6 +20,14 @@ def get_ListAktif_data():
         st.exception(e)
         return None
     
+def get_ListNonAktif_data(): 
+    try:
+        return [f"{x:.3f}" for x in df['LIS NON AKTIF']]
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
+    
 def get_TotalHousehold_data(): 
     try:
         return [f"{x:.3f}" for x in df['TOTAL HOUSEHOLD']]
@@ -39,6 +47,14 @@ def get_PortAvail_data():
 def get_TotalPort_data(): 
     try:
         return [f"{x:.3f}" for x in df['TOTAL PORT']]
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
+    
+def get_PortUnavail_data(): 
+    try:
+        return [f"{x:.3f}" for x in df['PORT UNAVAILABLE']]
     except Exception as e:
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
