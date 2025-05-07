@@ -5,9 +5,6 @@ import os as os
 from controller import *
 from model import *
 
-st.write(get_account_data()["email"].tolist())
-st.write(get_account_data()["password"].tolist())
-
 if 'kecamatan' not in st.session_state:
     st.session_state['kecamatan'] = "Semua"
 if 'desa' not in st.session_state:
@@ -15,7 +12,7 @@ if 'desa' not in st.session_state:
 
 gdf = map_path()
 kecamatanList = kecamatan_list()
-productList = ['Semua  Produk','By.u', 'IndiHome']
+productList = ['Semua Produk', 'IndiHome', 'Telkomsel One', 'Telkomsel Prabayar', 'Telkomsel Orbit', 'Telkomsel Lite', 'Telkomsel by. U']
 
 # Selectbox For Kecamatan and Desa
 colKecamatan, colDesa, colProduct, colEmpty = st.columns([0.25, 0.25, 0.25, 0.5])
@@ -45,26 +42,26 @@ with colText :
             st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
             st.caption("Rekomendasi")
 
-            # query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
-            # qa = load_chatbot()
+            query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
+            qa = load_chatbot()
 
-            # if query:
-            #     with st.spinner("SSABAR SUMPAHH RODOK LEMOTTTT"):
-            #         result = get_chatbot_response(qa, query)
-            #         # st.markdown("### 🧠 ini dia jawabannya gesss:")
-            #         st.markdown(result["result"])
+            if query:
+                with st.spinner("SSABAR SUMPAHH RODOK LEMOTTTT"):
+                    result = get_chatbot_response(qa, query)
+                    # st.markdown("### 🧠 ini dia jawabannya gesss:")
+                    st.markdown(result["result"])
     elif st.session_state.kecamatan != "Search Kecamatan" and st.session_state.kecamatan != "Semua":
         with st.container(border=True, height=600):
             st.title(f"Kec. {st.session_state.kecamatan}")
-            # st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
+            st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
             st.caption("Rekomendasi")
 
-            # query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
-            # qa = load_chatbot()
+            query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
+            qa = load_chatbot()
 
-            # if query:
-            #     with st.spinner("SSABAR SUMPAHH RODOK LEMOTTTT"):
-            #         result = get_chatbot_response(qa, query)
+            if query:
+                with st.spinner("SSABAR SUMPAHH RODOK LEMOTTTT"):
+                    result = get_chatbot_response(qa, query)
             
 st.title("Pendidikan")
 graphPendidikan(st.session_state['kecamatan'])
