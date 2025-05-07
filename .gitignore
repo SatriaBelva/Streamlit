@@ -1,0 +1,11 @@
+# Ignore secrets
+.streamlit/secrets.toml
+
+# Ignore VENV
+**/env/
+env/
+streamlit/env/
+*.pyc
+__pycache__/
+*.pkl
+.DS_Store
