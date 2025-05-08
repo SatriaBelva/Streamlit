@@ -10,7 +10,7 @@ import streamlit as st
 
 @st.cache_resource
 def load_chatbot():
-    loader = UnstructuredWordDocumentLoader("data\Data Product Telkomsel.docx")
+    loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
     documents = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(chunk_size=2500, chunk_overlap=500)
