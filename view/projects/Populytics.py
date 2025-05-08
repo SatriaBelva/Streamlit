@@ -34,32 +34,42 @@ with colMap :
     map(st.session_state['kecamatan'], st.session_state['desa'])
     index_kecamatan = kecamatanList.index(st.session_state.get("kecamatan"))
 with colText :
-    if st.session_state.kecamatan == "Search Kecamatan":
-        st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")
-    elif st.session_state.kecamatan == "Semua":
-        with st.container(border=True, height=600):
-            st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
-            st.caption("Rekomendasi")
+    st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
+    st.caption("Rekomendasi")
 
-            query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
-            qa = load_chatbot()
+    query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
+    qa = load_chatbot()
 
-            if query:
-                with st.spinner("Sedang Mencari Jawaban"):
-                    result = get_chatbot_response(qa, query)
-                    st.markdown(result["result"])
-    elif st.session_state.kecamatan != "Search Kecamatan" and st.session_state.kecamatan != "Semua":
-        with st.container(border=True, height=600):
-            st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
-            st.caption("Rekomendasi")
+    if query:
+        with st.spinner("Sedang Mencari Jawaban"):
+            result = get_chatbot_response(qa, query)
+            st.markdown(result["result"])
+    # if st.session_state.kecamatan == "Search Kecamatan":
+    #     st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")
+    # elif st.session_state.kecamatan == "Semua":
+    #     with st.container(border=True, height=600):
+    #         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
+    #         st.caption("Rekomendasi")
 
-            query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
-            qa = load_chatbot()
+    #         query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
+    #         qa = load_chatbot()
 
-            if query:
-                with st.spinner("Sedang Mencari Jawaban"):
-                    result = get_chatbot_response(qa, query)
-                    st.markdown(result["result"])
+    #         if query:
+    #             with st.spinner("Sedang Mencari Jawaban"):
+    #                 result = get_chatbot_response(qa, query)
+    #                 st.markdown(result["result"])
+    # elif st.session_state.kecamatan != "Semua":
+    #     with st.container(border=True, height=600):
+    #         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
+    #         st.caption("Rekomendasi")
+
+    #         query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
+    #         qa = load_chatbot()
+
+    #         if query:
+    #             with st.spinner("Sedang Mencari Jawaban"):
+    #                 result = get_chatbot_response(qa, query)
+    #                 st.markdown(result["result"])
             
 st.title("Pendidikan")
 graphPendidikan(st.session_state['kecamatan'])
