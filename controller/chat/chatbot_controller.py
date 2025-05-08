@@ -21,7 +21,7 @@ def load_chatbot():
 
     llm = ChatOpenAI(
         model_name="deepseek/deepseek-r1:free",
-        openai_api_key="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",
+        openai_api_key="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",
         openai_api_base="https://openrouter.ai/api/v1"
     )
 
