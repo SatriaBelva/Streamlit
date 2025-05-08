@@ -19,3 +19,4 @@ python-docx
 openai
 langchain_community
 mysqlclient
+pymysql
