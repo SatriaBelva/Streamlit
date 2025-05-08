@@ -12,10 +12,8 @@ def get_current_user():
             "name": st.session_state["manual_user"]["name"]
         })()
 
-    # Jika login Google
     user = st.experimental_user
 
-    # Cegah kondisi race condition: Google login berhasil tapi data belum ter-load
     if user is None:
         st.info("🔄 Menunggu data login Google...")
         st.stop()
@@ -27,7 +25,6 @@ def get_current_user():
             "name": user.get("name", "No Name")
         })()
 
-    # Belum login
     return type("User", (), {
         "is_logged_in": False,
         "email": None,
@@ -70,7 +67,7 @@ def is_email_allowed(email: str) -> bool:
 
 # Komponen UI untuk login
 def render_login_page():
-    landing_page_style()
+    # landing_page_style()
     st.markdown(hide_tools(), unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([0.2, 0.6, 0.2])
