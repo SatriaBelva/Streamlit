@@ -32,7 +32,6 @@ with colText :
         st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")
     elif st.session_state.kecamatan == "Semua":
         with st.container(border=True, height=600):
-            st.title(f"Kabupaten Jember")
             st.title(f"kec. {selected_kecamatan}")
             st.caption("Rekomendasi")
 

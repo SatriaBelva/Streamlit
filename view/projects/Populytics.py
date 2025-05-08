@@ -38,7 +38,6 @@ with colText :
         st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")
     elif st.session_state.kecamatan == "Semua":
         with st.container(border=True, height=600):
-            st.title(f"Kabupaten Jember")
             st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
             st.caption("Rekomendasi")
 
@@ -48,11 +47,9 @@ with colText :
             if query:
                 with st.spinner("Sedang Mencari Jawaban"):
                     result = get_chatbot_response(qa, query)
-                    # st.markdown("### 🧠 ini dia jawabannya gesss:")
                     st.markdown(result["result"])
     elif st.session_state.kecamatan != "Search Kecamatan" and st.session_state.kecamatan != "Semua":
         with st.container(border=True, height=600):
-            st.title(f"Kec. {st.session_state.kecamatan}")
             st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
             st.caption("Rekomendasi")
 
@@ -62,6 +59,7 @@ with colText :
             if query:
                 with st.spinner("Sedang Mencari Jawaban"):
                     result = get_chatbot_response(qa, query)
+                    st.markdown(result["result"])
             
 st.title("Pendidikan")
 graphPendidikan(st.session_state['kecamatan'])
