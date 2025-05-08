@@ -18,7 +18,7 @@ def map_path2() :
 
 def kecamatan_list() :
     kecamatan_list = sorted(map_path()['WADMKC'].unique())
-    # kecamatan_list.append("Semua")
+    kecamatan_list.append("Semua")
     # kecamatan_list.append("Search Kecamatan")
     return kecamatan_list
 
