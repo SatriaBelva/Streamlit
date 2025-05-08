@@ -46,7 +46,7 @@ with colText :
             qa = load_chatbot()
 
             if query:
-                with st.spinner("SSABAR SUMPAHH RODOK LEMOTTTT"):
+                with st.spinner("Sedang Mencari Jawaban"):
                     result = get_chatbot_response(qa, query)
                     # st.markdown("### 🧠 ini dia jawabannya gesss:")
                     st.markdown(result["result"])
@@ -60,7 +60,7 @@ with colText :
             qa = load_chatbot()
 
             if query:
-                with st.spinner("SSABAR SUMPAHH RODOK LEMOTTTT"):
+                with st.spinner("Sedang Mencari Jawaban"):
                     result = get_chatbot_response(qa, query)
             
 st.title("Pendidikan")
