@@ -29,10 +29,10 @@ with colMap :
     # pass
 with colText :
     with st.container(border=True, height=600):
-        st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
+        st.title(f"kec. {selected_kecamatan}")
         st.caption("Rekomendasi")
 
-        query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
+        query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"
         qa = load_chatbot()
 
         if query:
