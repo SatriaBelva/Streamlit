@@ -14,19 +14,48 @@ def get_current_user():
 
     # Jika login Google
     user = st.experimental_user
+
+    # Cegah kondisi race condition: Google login berhasil tapi data belum ter-load
+    if user is None:
+        st.info("🔄 Menunggu data login Google...")
+        st.stop()
+
     if user and "email" in user:
         return type("User", (), {
             "is_logged_in": True,
-            "email": user["email"],  # Akses email via key
-            "name": user.get("name", "No Name")  # Periksa jika name ada
+            "email": user["email"],
+            "name": user.get("name", "No Name")
         })()
 
-    # Jika belum login
+    # Belum login
     return type("User", (), {
         "is_logged_in": False,
         "email": None,
         "name": None
     })()
+    # Jika login manual
+    # if "manual_user" in st.session_state:
+    #     return type("User", (), {
+    #         "is_logged_in": True,
+    #         "email": st.session_state["manual_user"]["email"],
+    #         "name": st.session_state["manual_user"]["name"]
+    #     })()
+
+    # # Jika login Google
+    # user = st.experimental_user
+    # if user and "email" in user:
+    #     return type("User", (), {
+    #         "is_logged_in": True,
+    #         "email": user["email"],  # Akses email via key
+    #         "name": user.get("name", "No Name")  # Periksa jika name ada
+    #     })()
+
+    # # Jika belum login
+    # return type("User", (), {
+    #     "is_logged_in": False,
+    #     "email": None,
+    #     "name": None
+    # })()
     # return st.experimental_user
 
 # Fungsi untuk ambil daftar email yang diizinkan dari database
