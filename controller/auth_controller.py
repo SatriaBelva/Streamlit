@@ -86,8 +86,8 @@ def render_login_page():
             else:
                 st.error("Email atau password salah.")
 
-        st.markdown("### 🔐 Login dengan Google")
-        st.button("Login dengan Google", use_container_width=False, on_click=lambda: st.login("google"), key="login_button")
+        # st.markdown("### 🔐 Login dengan Google")
+        # st.button("Login dengan Google", use_container_width=False, on_click=lambda: st.login("google"), key="login_button")
     with col3:
         pass
     # landing_page_style()
