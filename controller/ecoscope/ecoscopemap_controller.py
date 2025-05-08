@@ -13,7 +13,7 @@ def map_path() :
 
 def map_path2() :
     # csv_path = "C:\Magang Grapari\Magang\streamlit\data\hasil_analisis_ekonomi.csv"
-    csv_path = "data\hasil_analisis_ekonomi.csv"
+    csv_path = "data/hasil_analisis_ekonomi.csv"
     return pd.read_csv(csv_path)
 
 def kecamatan_list() :
