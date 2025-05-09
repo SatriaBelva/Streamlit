@@ -38,7 +38,7 @@ with colText :
         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
         st.caption("Rekomendasi")
 
-        query = f"Berikan beberapa rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada diwilayah tersebut, serta sesuai dengan tingkat ekonomi yang ada pada kecamatan {selected_kecamatan} dan berikan alasannya"
+        query = f"Berikan beberapa rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada diwilayah tersebut, dan berikan alasannya"
         qa = load_chatbot_popu()
 
         if query:
