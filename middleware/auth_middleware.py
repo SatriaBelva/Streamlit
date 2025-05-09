@@ -23,10 +23,10 @@ def auth_guard():
             render_login_page()
             return False
 
-        st.info(f"👤 User terdeteksi: {user.email if hasattr(user, 'email') else 'Tidak ada email'}")
+        # st.info(f"👤 User terdeteksi: {user.email if hasattr(user, 'email') else 'Tidak ada email'}")
 
         if not user.is_logged_in:
-            st.warning("⚠️ User belum login.")
+            # st.warning("⚠️ User belum login.")
             render_login_page()
             return False
 
