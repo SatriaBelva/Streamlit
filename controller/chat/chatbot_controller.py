@@ -21,8 +21,8 @@ def load_chatbot():
     vectorstore = FAISS.from_documents(chunks, embedding=embeddings)
 
     llm = ChatOpenAI(
-        model_name="deepseek/deepseek-r1:free",
-        openai_api_key="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",
+        model_name="google/gemini-2.0-flash-exp:free",
+        openai_api_key="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",
         openai_api_base="https://openrouter.ai/api/v1"
     )
 
