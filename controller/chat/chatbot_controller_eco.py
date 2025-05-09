@@ -14,7 +14,7 @@ def load_chatbot_eco():
     loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
     documents = loader.load()
 
-    splitter = RecursiveCharacterTextSplitter(chunk_size=2500, chunk_overlap=500)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=2500, chunk_overlap=800)
     chunks = splitter.split_documents(documents)
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
