@@ -67,7 +67,7 @@ def is_email_allowed(email: str) -> bool:
 
 # Komponen UI untuk login
 def render_login_page():
-    # landing_page_style()
+    landing_page_style()
     st.markdown(hide_tools(), unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([0.2, 0.6, 0.2])
