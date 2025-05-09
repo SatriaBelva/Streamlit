@@ -33,11 +33,11 @@ with colText :
         st.caption("Rekomendasi")
 
         query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"
-        qa = load_chatbot()
+        qa = load_chatbot_eco()
 
         if query:
             with st.spinner("Sedang Mencari Jawaban"):
-                result = get_chatbot_response(qa, query)
+                result = get_chatbot_response_eco(qa, query)
                 st.markdown(result["result"])
     # if st.session_state.kecamatan == "Search Kecamatan":
     #     st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")

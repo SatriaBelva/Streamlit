@@ -10,7 +10,7 @@ import streamlit as st
 
 #blabla
 @st.cache_resource
-def load_chatbot():
+def load_chatbot_eco():
     loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
     documents = loader.load()
 
@@ -49,5 +49,5 @@ Jawaban akurat dan lengkap berdasarkan data di atas:"""
 
     return qa_chain
 
-def get_chatbot_response(qa, query):
+def get_chatbot_response_eco(qa, query):
     return qa(query)
