@@ -36,15 +36,15 @@ with colMap :
 with colText :
     with st.container(border=True, height=600):
         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
-        st.caption("Rekomendasi")
+        # st.caption("Rekomendasi")
 
-        query = f"Berikan beberapa rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
-        qa = load_chatbot_popu()
+        # query = f"Berikan beberapa rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
+        # qa = load_chatbot_popu()
 
-        if query:
-            with st.spinner("Sedang Mencari Jawaban"):
-                result = get_chatbot_response_popu(qa, query)
-                st.markdown(result["result"])
+        # if query:
+        #     with st.spinner("Sedang Mencari Jawaban"):
+        #         result = get_chatbot_response_popu(qa, query)
+        #         st.markdown(result["result"])
     # if st.session_state.kecamatan == "Search Kecamatan":
     #     st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")
     # elif st.session_state.kecamatan == "Semua":
