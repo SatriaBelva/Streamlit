@@ -22,7 +22,8 @@ def load_chatbot_popu():
 
     llm = ChatOpenAI(
         model_name="google/gemini-2.0-flash-exp:free",
-        openai_api_key="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",
+        # openai_api_key="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",
+        openai_api_key=" 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", #cadangan
         openai_api_base="https://openrouter.ai/api/v1"
     )
 

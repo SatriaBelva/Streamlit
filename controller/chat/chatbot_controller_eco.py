@@ -23,6 +23,7 @@ def load_chatbot_eco():
     llm = ChatOpenAI(
         model_name="google/gemini-2.0-flash-exp:free",
         openai_api_key="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",
+        # openai_api_key="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", #cadangan
         openai_api_base="https://openrouter.ai/api/v1"
     )
 
