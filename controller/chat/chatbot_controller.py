@@ -8,6 +8,7 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 import streamlit as st
 
+#blabla
 @st.cache_resource
 def load_chatbot():
     loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
