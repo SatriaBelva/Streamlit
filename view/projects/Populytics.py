@@ -55,9 +55,12 @@ with colText :
         st.markdown("### Ajukan pertanyaan lain:")
         user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
 
-        if user_query:
+        final_query = user_query if user_query.strip() != "" else default_query
+
+
+        if final_query:
             with st.spinner("Sedang mencari jawaban..."):
-                user_result = get_chatbot_response_popu(qa, user_query)
+                user_result = get_chatbot_response_popu(qa, final_query)
                 st.markdown("### Jawaban dari pertanyaan Anda:")
                 st.markdown(user_result["result"])
             
