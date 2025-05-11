@@ -35,42 +35,41 @@ with colMap :
     index_kecamatan = kecamatanList.index(st.session_state.get("kecamatan"))
 with colText :
     with st.container(border=True, height=600):
+        # st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
+        # st.caption("Rekomendasi")
+
+        # query = f"Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
+        # qa = load_chatbot_popu()
+
+        # if query:
+        #     with st.spinner("Sedang Mencari Jawaban"):
+        #         result = get_chatbot_response_popu(qa, query)
+        #         st.markdown(result["result"])
+
         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
         st.caption("Rekomendasi")
-
-        query = f"Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
         qa = load_chatbot_popu()
 
-        if query:
-            with st.spinner("Sedang Mencari Jawaban"):
-                result = get_chatbot_response_popu(qa, query)
-                st.markdown(result["result"])
-    # if st.session_state.kecamatan == "Search Kecamatan":
-    #     st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")
-    # elif st.session_state.kecamatan == "Semua":
-    #     with st.container(border=True, height=600):
-    #         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
-    #         st.caption("Rekomendasi")
+        # Pertanyaan otomatis
+        default_query = f"Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
 
-    #         query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
-    #         qa = load_chatbot()
+        with st.spinner("Sedang mencari jawaban..."):
+            default_result = get_chatbot_response_popu(qa, default_query)
+            st.markdown("### Jawaban dari pertanyaan otomatis:")
+            st.markdown(default_result["result"])
 
-    #         if query:
-    #             with st.spinner("Sedang Mencari Jawaban"):
-    #                 result = get_chatbot_response(qa, query)
-    #                 st.markdown(result["result"])
-    # elif st.session_state.kecamatan != "Semua":
-    #     with st.container(border=True, height=600):
-    #         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
-    #         st.caption("Rekomendasi")
+        # Garis pemisah
+        st.markdown("---")
 
-    #         query = f"Berikan rekomendasi pilihan paket internet pada {selected_Product} di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan sesuai dengan tingkat ekonomi yang ada disitu, dan berikan alasannya"
-    #         qa = load_chatbot()
+        # Input pertanyaan manual dari user (di bawah)
+        st.markdown("### Ajukan pertanyaan lain:")
+        user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
 
-    #         if query:
-    #             with st.spinner("Sedang Mencari Jawaban"):
-    #                 result = get_chatbot_response(qa, query)
-    #                 st.markdown(result["result"])
+        if user_query:
+            with st.spinner("Sedang mencari jawaban..."):
+                user_result = get_chatbot_response_popu(qa, user_query)
+                st.markdown("### Jawaban dari pertanyaan Anda:")
+                st.markdown(user_result["result"])
             
 st.title("Pendidikan")
 graphPendidikan(st.session_state['kecamatan'])
