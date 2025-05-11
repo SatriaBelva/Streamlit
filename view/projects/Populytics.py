@@ -35,16 +35,6 @@ with colMap :
     index_kecamatan = kecamatanList.index(st.session_state.get("kecamatan"))
 with colText :
     with st.container(border=True, height=600):
-        # st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
-        # st.caption("Rekomendasi")
-
-        # query = f"Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
-        # qa = load_chatbot_popu()
-
-        # if query:
-        #     with st.spinner("Sedang Mencari Jawaban"):
-        #         result = get_chatbot_response_popu(qa, query)
-        #         st.markdown(result["result"])
 
         st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
         st.caption("Rekomendasi")
