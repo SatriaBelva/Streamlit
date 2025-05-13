@@ -30,42 +30,30 @@ with colMap :
 with colText :
     with st.container(border=True, height=600):
         st.title(f"kec. {selected_kecamatan}")
-        # st.caption("Rekomendasi")
+        st.caption("Rekomendasi")
+        qa = load_chatbot_eco()
 
-        # query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"
-        # qa = load_chatbot_eco()
+        default_query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"
 
-        # if query:
-        #     with st.spinner("Sedang Mencari Jawaban"):
-        #         result = get_chatbot_response_eco(qa, query)
-        #         st.markdown(result["result"])
-    # if st.session_state.kecamatan == "Search Kecamatan":
-    #     st.warning("Silahkan Pilih Kecamatan Terlebih dahulu")
-    # elif st.session_state.kecamatan == "Semua":
-    #     with st.container(border=True, height=600):
-    #         st.title(f"kec. {selected_kecamatan}")
-    #         st.caption("Rekomendasi")
+        # Input pertanyaan manual dari user (di bawah)
+        # st.markdown("### Ajukan pertanyaan lain:")
+        user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
 
-    #         query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"
-    #         qa = load_chatbot()
+        with st.spinner("Sedang mencari jawaban..."):
+            default_result = get_chatbot_response_eco(qa, default_query)
+            st.markdown(default_result["result"])
 
-    #         if query:
-    #             with st.spinner("Sedang Mencari Jawaban"):
-    #                 result = get_chatbot_response(qa, query)
-    #                 st.markdown(result["result"])
-    # elif st.session_state.kecamatan != "Semua":
-    #     with st.container(border=True, height=600):
-    #         st.title(f"Kabupaten Jember")
-    #         st.title(f"kec. {selected_kecamatan}")
-    #         st.caption("Rekomendasi")
+        # Garis pemisah
+        st.markdown("---")
 
-    #         query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"
-    #         qa = load_chatbot()
+        final_query = user_query if user_query.strip() != "" else default_query
 
-    #         if query:
-    #             with st.spinner("Sedang Mencari Jawaban"):
-    #                 result = get_chatbot_response(qa, query)
-    #                 st.markdown(result["result"])
+
+        if final_query:
+            with st.spinner("Sedang mencari jawaban..."):
+                user_result = get_chatbot_response_eco(qa, final_query)
+                st.markdown("### Jawaban dari pertanyaan Anda:")
+                st.markdown(user_result["result"])
 
 st.title("Indeks Ekonomi")
 graphIndeksEkonomi(st.session_state['kecamatan'])
