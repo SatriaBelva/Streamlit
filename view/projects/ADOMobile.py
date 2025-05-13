@@ -15,13 +15,14 @@ col3, col2 = st.columns(2)
 with col3 :
     st.subheader("Distribusi ARPU per Kecamatan")
     # graph_ARPU()
-    graph_Arpu()
+    graph_Site_pie()
+    # graph_Arpu()
 with col2 :
     st.subheader("Distribusi Outlet Mitra")
     graph_OUTLETPJP_pie()
 
 st.title("Jumlah Persebaran Menara BTS")
-graph_Site_pie()
+graph_Arpu()
 
 table()
 
