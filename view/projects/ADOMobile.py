@@ -18,10 +18,10 @@ with col3 :
     graph_Arpu()
 with col2 :
     st.subheader("Distribusi Outlet Mitra")
-    graph_OUTLETPJP()
+    graph_OUTLETPJP_pie()
 
 st.title("Jumlah Persebaran Menara BTS")
-graph_Site()
+graph_Site_pie()
 
 table()
 
