@@ -4,8 +4,25 @@ from controller import *
 from model import *
 
 col1, col2 = st.columns(2)
-with col1 :
-    with st.container(border=True, height=600):
+with col1:
+    with st.container():
+        # Tambahkan gaya CSS untuk background putih dan border
+        st.markdown(
+            """
+            <style>
+            div[data-testid="stVerticalBlock"] > div:nth-child(1) {
+                background-color: white;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                height: 600px;
+                overflow: auto;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
         st.subheader("Jumlah Pelanggan Aktif")
         graphCB_Populasi()
 with col2 :
