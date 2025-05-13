@@ -43,17 +43,16 @@ with colText :
         # Pertanyaan otomatis
         default_query = f"Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
 
+        # Input pertanyaan manual dari user (di bawah)
+        st.markdown("### Ajukan pertanyaan lain:")
+        user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
+
         with st.spinner("Sedang mencari jawaban..."):
             default_result = get_chatbot_response_popu(qa, default_query)
-            st.markdown("### Jawaban dari pertanyaan otomatis:")
             st.markdown(default_result["result"])
 
         # Garis pemisah
         st.markdown("---")
-
-        # Input pertanyaan manual dari user (di bawah)
-        st.markdown("### Ajukan pertanyaan lain:")
-        user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
 
         final_query = user_query if user_query.strip() != "" else default_query
 
