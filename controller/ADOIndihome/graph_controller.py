@@ -159,22 +159,13 @@ def graph_ODP_pie():
         .str.replace(",", ".", regex=False)  # ubah koma ke titik
         .astype(float)
     )
-
-    # Buat tampilan 2 kolom
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.write("Data ODP per Kabupaten:")
-        st.dataframe(dataPendidikan)
-
-    with col2:
-        st.write("Pie Chart ODP:")
-        fig = px.pie(
-            dataPendidikan,
-            values="ODP",
-            names="Kabupaten",
-            title="Distribusi ODP per Kabupaten",
-            color_discrete_sequence=px.colors.sequential.RdBu
-        )
+    st.write("Pie Chart ODP:")
+    fig = px.pie(
+        dataPendidikan,
+        values="ODP",
+        names="Kabupaten",
+        title="Distribusi ODP per Kabupaten",
+        color_discrete_sequence=px.colors.sequential.RdBu
+    )
 
     st.plotly_chart(fig, use_container_width=True)
