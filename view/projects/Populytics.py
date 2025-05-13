@@ -44,7 +44,7 @@ with colText :
         default_query = f"Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
 
         # Input pertanyaan manual dari user (di bawah)
-        st.markdown("### Ajukan pertanyaan lain:")
+        # st.markdown("### Ajukan pertanyaan lain:")
         user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
 
         with st.spinner("Sedang mencari jawaban..."):
