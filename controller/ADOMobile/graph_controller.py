@@ -35,7 +35,7 @@ def graphCB_Populasi():
     chart = alt.Chart(df_melted).mark_bar().encode(
         x=alt.X("Kabupaten:N", sort=None),
         y=alt.Y("Jumlah:Q"),
-        xOffset="Kategori:N",  # Ini penting untuk grouped bar
+        # xOffset="Kategori:N",  # Ini penting untuk grouped bar
         color=alt.Color("Kategori:N", scale=alt.Scale(range=["#FD9B2A", "#E30511"]), legend=alt.Legend(orient="top")),  # 👈 legend di bawah),
         tooltip=[
             alt.Tooltip("Kabupaten:N"),
