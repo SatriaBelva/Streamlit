@@ -159,12 +159,12 @@ def graph_ODP_pie():
         .str.replace(",", ".", regex=False)  # ubah koma ke titik
         .astype(float)
     )
-    st.write("Pie Chart ODP:")
+    # st.write("Pie Chart ODP:")
     fig = px.pie(
         dataPendidikan,
         values="ODP",
         names="Kabupaten",
-        title="Distribusi ODP per Kabupaten",
+        # title="Distribusi ODP per Kabupaten",
         color_discrete_sequence=px.colors.sequential.RdBu
     )
 
