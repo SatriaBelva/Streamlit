@@ -8,16 +8,16 @@ with col1 :
     st.subheader("Pengguna Aktif IndiHome")
     graph_ListAktif_TotalHousehold()
 with col2 :
-    st.subheader("Port")
+    st.subheader("Ketersediaan Port IndiHome")
     graph_PortAvail_TotalPort()
 
 col1, col2 = st.columns(2)
 with col1 :
-    st.subheader("Pangsa Pasar Layanan Internet")
+    st.subheader("Jumlah Persebaran WIFI")
     # graph_WifiShare()
     graph_WifiShare_pie()
 with col2 :
-    st.subheader("Jumlah Optical Distribution Point")
+    st.subheader("Jumlah Titik ODP")
     # graph_ODP()
     graph_ODP_pie()
 

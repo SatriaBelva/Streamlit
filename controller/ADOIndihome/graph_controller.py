@@ -37,7 +37,7 @@ def graph_ListAktif_TotalHousehold():
         x=alt.X("Kabupaten:N", sort=None),
         y=alt.Y("Jumlah:Q"),
         # xOffset="Kategori:N",  # Buat Ngatur Stack
-        color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511", "#F5868D"]), legend=alt.Legend(orient="top")),  # 👈 legend di bawah),
+        color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511", "#FD9B2A"]), legend=alt.Legend(orient="top")),  # 👈 legend di bawah),
         tooltip=[
             alt.Tooltip("Kabupaten:N"),
             alt.Tooltip("Kategori:N"),
@@ -79,7 +79,7 @@ def graph_PortAvail_TotalPort():
         x=alt.X("Kabupaten:N", sort=None),
         y=alt.Y("Jumlah:Q"),
         # xOffset="Kategori:N",  # Ini penting untuk grouped bar
-        color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#F5868D"]), legend=alt.Legend(orient="top")),  # 👈 legend di bawah),
+        color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#FD9B2A"]), legend=alt.Legend(orient="top")),  # 👈 legend di bawah),
         tooltip=[
             alt.Tooltip("Kabupaten:N"),
             alt.Tooltip("Kategori:N"),
