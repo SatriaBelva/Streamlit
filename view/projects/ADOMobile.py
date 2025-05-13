@@ -30,55 +30,41 @@ from model import *
 
 # table()
 
-def white_container(content_func, height=700):
-    """Wrapper untuk konten dalam container putih + border"""
-    st.markdown(
-        f"""
-        <div style="background-color:white; padding:20px; border-radius:10px; 
-                    border:1px solid #ddd; height:{height}px; overflow:auto;">
-        """,
-        unsafe_allow_html=True
-    )
-    content_func()
-    st.markdown("</div>", unsafe_allow_html=True)
+def container_putih(title, content_func, height=700):
+    """Kontainer berwarna putih dengan border dan tinggi tertentu"""
+    with st.container():
+        st.markdown(
+            f"""
+            <div style='background-color:white; padding:20px; border:1px solid #ddd;
+                        border-radius:10px; height:{height}px; overflow:auto'>
+            <h3 style='margin-top:0'>{title}</h3>
+            """,
+            unsafe_allow_html=True
+        )
+        content_func()
+        st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Layout 1 ---
 col1, col2 = st.columns(2)
 
 with col1:
-    white_container(lambda: (
-        st.subheader("Jumlah Pelanggan Aktif"),
-        graphCB_Populasi()
-    ))
+    container_putih("Jumlah Pelanggan Aktif", graphCB_Populasi)
 
 with col2:
-    white_container(lambda: (
-        st.subheader("Distribusi ARPU per Kecamatan"),
-        graph_Arpu()
-    ))
+    container_putih("Distribusi ARPU per Kecamatan", graph_Arpu)
 
 # --- Layout 2 ---
 col3, col4 = st.columns(2)
 
 with col3:
-    white_container(lambda: (
-        st.subheader("Jumlah Persebaran Menara BTS"),
-        graph_Site_pie()
-    ))
+    container_putih("Jumlah Persebaran Menara BTS", graph_Site_pie)
 
 with col4:
-    white_container(lambda: (
-        st.subheader("Distribusi Outlet Mitra"),
-        graph_OUTLETPJP_pie()
-    ))
+    container_putih("Distribusi Outlet Mitra", graph_OUTLETPJP_pie)
 
-# --- Full width container ---
-white_container(lambda: (
-    st.title("FB Share Reg & Youth per Kecamatan"),
-    graph_FBREG_FBYouth()
-))
+# --- Full Width ---
+container_putih("FB Share Reg & Youth per Kecamatan", graph_FBREG_FBYouth)
 
-# --- Footer components ---
+# --- Tabel dan Tombol ---
 table()
-
 refreshButton()
