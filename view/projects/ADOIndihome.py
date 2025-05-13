@@ -14,7 +14,8 @@ with col2 :
 col1, col2 = st.columns(2)
 with col1 :
     st.subheader("Pangsa Pasar Layanan Internet")
-    graph_WifiShare()
+    # graph_WifiShare()
+    graph_WifiShare_pie()
 with col2 :
     st.subheader("Jumlah Optical Distribution Point")
     # graph_ODP()
