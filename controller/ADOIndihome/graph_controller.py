@@ -4,6 +4,7 @@ import numpy as np
 from controller import *
 from model import *
 import altair as alt
+import plotly_express as px
 
 def graph_ListAktif_TotalHousehold():
     dataPendidikan = pd.DataFrame(
@@ -113,7 +114,38 @@ def graph_WifiShare():
 
     return st.altair_chart(chart, use_container_width=True)
 
-def graph_ODP():
+# def graph_ODP():
+#     dataPendidikan = pd.DataFrame(
+#         {
+#             "Kabupaten" : get_Kabupaten_data(),
+#             "ODP"       : get_ODP_data(),
+#         }
+#     )
+    
+#     dataPendidikan["ODP"] = (
+#         dataPendidikan["ODP"]
+#         .astype(str)
+#         .str.replace(",", ".", regex=False)  # ubah koma ke titik
+#         .astype(float)
+#     )
+
+#     df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars="ODP", var_name="Kategori", value_name="Jumlah")
+
+#     chart = alt.Chart(df_melted).mark_bar().encode(
+#         x=alt.X("Kabupaten:N", sort=None),
+#         y=alt.Y("Jumlah:Q"),
+#         # xOffset="Kategori:N",  # Ini penting untuk grouped bar
+#         color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#F5868D"]), legend=alt.Legend(orient="bottom")),  # 👈 legend di bawah),
+#         tooltip=[
+#             alt.Tooltip("Kabupaten:N"),
+#             alt.Tooltip("Kategori:N"),
+#             alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
+#         ]
+#     ).properties(height=550)
+
+#     return st.altair_chart(chart, use_container_width=True)
+
+def graph_ODP_pie():
     dataPendidikan = pd.DataFrame(
         {
             "Kabupaten" : get_Kabupaten_data(),
@@ -128,21 +160,21 @@ def graph_ODP():
         .astype(float)
     )
 
-    df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars="ODP", var_name="Kategori", value_name="Jumlah")
+    # Buat tampilan 2 kolom
+    col1, col2 = st.columns(2)
 
-    chart = alt.Chart(df_melted).mark_bar().encode(
-        x=alt.X("Kabupaten:N", sort=None),
-        y=alt.Y("Jumlah:Q"),
-        # xOffset="Kategori:N",  # Ini penting untuk grouped bar
-        color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#F5868D"]), legend=alt.Legend(orient="bottom")),  # 👈 legend di bawah),
-        tooltip=[
-            alt.Tooltip("Kabupaten:N"),
-            alt.Tooltip("Kategori:N"),
-            alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
-        ]
-    ).properties(height=550)
+    with col1:
+        st.write("Data ODP per Kabupaten:")
+        st.dataframe(dataPendidikan)
 
-    return st.altair_chart(chart, use_container_width=True)
+    with col2:
+        st.write("Pie Chart ODP:")
+        fig = px.pie(
+            dataPendidikan,
+            values="ODP",
+            names="Kabupaten",
+            title="Distribusi ODP per Kabupaten",
+            color_discrete_sequence=px.colors.sequential.RdBu
+        )
 
-
-
+    st.plotly_chart(fig, use_container_width=True)

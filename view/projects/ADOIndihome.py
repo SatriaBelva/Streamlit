@@ -17,6 +17,7 @@ with col1 :
     graph_WifiShare()
 with col2 :
     st.subheader("Jumlah Optical Distribution Point")
-    graph_ODP()
+    # graph_ODP()
+    graph_ODP_pie()
 
 tableADOIH()
