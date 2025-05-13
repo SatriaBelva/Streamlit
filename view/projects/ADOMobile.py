@@ -8,7 +8,7 @@ with col1 :
     st.subheader("Jumlah Pelanggan Aktif")
     graphCB_Populasi()
 with col2 :
-    st.subheader("FB Share Reg & Youth per Kecamatan")
+    st.subheader("Distribusi ARPU per Kecamatan")
     graph_Arpu()
 
 col3, col2 = st.columns(2)
@@ -19,7 +19,7 @@ with col2 :
     st.subheader("Distribusi Outlet Mitra")
     graph_OUTLETPJP_pie()
 
-st.title("Distribusi ARPU per Kecamatan")
+st.title("FB Share Reg & Youth per Kecamatan")
 graph_FBREG_FBYouth()
 
 table()
