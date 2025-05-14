@@ -7,7 +7,7 @@ st.set_page_config(
     }
 )
 with st.sidebar:
-    st.image("assets\logo_telkomsel.png", width=150)
+    st.image("assets/logo_telkomsel.png", width=150)
 
 from routes import *
 from middleware import *
