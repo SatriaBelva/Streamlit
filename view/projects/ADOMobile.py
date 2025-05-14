@@ -95,28 +95,28 @@ st.markdown("""
 col1, col2 = st.columns(2)
 
 with col1:
-    with st.container(border=True, height=630):
+    with st.container(border=True):
         st.subheader("Jumlah Pelanggan Aktif")
         graphCB_Populasi()  # altair_chart masuk ke dalam!
 
 with col2:
-    with st.container(border=True, height=630):
+    with st.container(border=True):
         st.subheader("Distribusi ARPU per Kecamatan")
         graph_Arpu()
 
 col3, col4 = st.columns(2)
 
 with col3:
-    with st.container(border=True, height=500):
+    with st.container(border=True):
         st.subheader("Jumlah Persebaran Menara BTS")
         graph_Site_pie()
 
 with col4:
-    with st.container(border=True, height=500):
+    with st.container(border=True):
         st.subheader("Distribusi Outlet Mitra")
         graph_OUTLETPJP_pie()
 
-with st.container(border=True, height=630):
+with st.container(border=True):
     st.title("FB Share Reg & Youth per Kecamatan")
     graph_FBREG_FBYouth()
 

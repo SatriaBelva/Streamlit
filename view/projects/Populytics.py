@@ -107,29 +107,24 @@ with colText :
         #         user_result = get_chatbot_response_popu(qa, final_query)
         #         st.markdown("### Jawaban dari pertanyaan Anda:")
         #         st.markdown(user_result["result"])
-            
-st.title("Pendidikan")
-graphPendidikan(st.session_state['kecamatan'])
-
-st.title("Pekerjaan")
-graphPekerjaan(st.session_state['kecamatan'])
-
-st.title("Jumlah Penduduk")
-graphJumlahPenduduk(st.session_state['kecamatan'])
-
-st.title("Jumlah KK")
-graphJumlahKK(st.session_state['kecamatan'])
+with st.container(border=True):            
+    st.title("Pendidikan")
+    graphPendidikan(st.session_state['kecamatan'])
+with st.container(border=True):
+    st.title("Pekerjaan")
+    graphPekerjaan(st.session_state['kecamatan'])
+with st.container(border=True):
+    st.title("Jumlah Penduduk")
+    graphJumlahPenduduk(st.session_state['kecamatan'])
+with st.container(border=True):
+    st.title("Jumlah KK")
+    graphJumlahKK(st.session_state['kecamatan'])
 
 
 st.markdown("""
     <style>
-        /* Hilangkan margin dan padding default body Streamlit */
-        .main > div:first-child {
-            padding-top: 0rem;
-        }
-
         /* Header container */
-        .custom-header-container {
+        .custom-header2-container {
             background-color: #D70000;
             border-radius: 8px 80px 8px 80px;
             height: 135px;
@@ -138,11 +133,11 @@ st.markdown("""
             align-items: center;
             justify-content: center;
             color: white;
-            margin-top: -3.5rem;
+            margin-top: 1rem;
             margin-bottom: 2rem;
         }
 
-        .custom-header-subtitle {
+        .custom-header2-subtitle {
             font-size: 16px;
             text-align: center;
             width: 80%;
@@ -155,8 +150,8 @@ st.markdown("""
 
 # Tampilkan header
 st.markdown("""
-    <div class="custom-header-container">
-        <div class="custom-header-subtitle"> (i) Data pekerjaan dan pendidikan dibagi menjadi beberapa kategori. Untuk kategori data pekerjaan, tidak atau belum bekerja (pelajar, mahasiswa, IRT, pensiunan), memiliki penghasilan tidak stabil (pedagang, wiraswasta, nelayan), atau penghasilan stabil (guru, perawat, pengacara). Untuk kategori data pendidikan, tingkatannya meliputi sekolah tinggi (D1–S3), sekolah menengah (SLTP/SLTA), serta tamat SD, putus sekolah, atau tidak sekolah.</div>
+    <div class="custom-header2-container">
+        <div class="custom-header2-subtitle"> (i) Data pekerjaan dan pendidikan dibagi menjadi beberapa kategori. Untuk kategori data pekerjaan, tidak atau belum bekerja (pelajar, mahasiswa, IRT, pensiunan), memiliki penghasilan tidak stabil (pedagang, wiraswasta, nelayan), atau penghasilan stabil (guru, perawat, pengacara). Untuk kategori data pendidikan, tingkatannya meliputi sekolah tinggi (D1–S3), sekolah menengah (SLTP/SLTA), serta tamat SD, putus sekolah, atau tidak sekolah.</div>
     </div>
 """, unsafe_allow_html=True)
 

@@ -48,22 +48,22 @@ st.markdown("""
 
 col1, col2 = st.columns(2)
 with col1 :
-    with st.container(border=True, height=630):
+    with st.container(border=True):
         st.subheader("Pengguna Aktif IndiHome")
         graph_ListAktif_TotalHousehold()
 with col2 :
-    with st.container(border=True, height=630):
+    with st.container(border=True):
         st.subheader("Ketersediaan Port IndiHome")
         graph_PortAvail_TotalPort()
 
 col1, col2 = st.columns(2)
 with col1 :
-    with st.container(border=True, height=500):
+    with st.container(border=True):
         st.subheader("Jumlah Persebaran WIFI")
         # graph_WifiShare()
         graph_WifiShare_pie()
 with col2 :
-    with st.container(border=True, height=500):
+    with st.container(border=True):
         st.subheader("Jumlah Titik ODP")
         # graph_ODP()
         graph_ODP_pie()

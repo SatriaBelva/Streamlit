@@ -100,8 +100,8 @@ with colText :
         #         user_result = get_chatbot_response_eco(qa, final_query)
         #         st.markdown("### Jawaban dari pertanyaan Anda:")
         #         st.markdown(user_result["result"])
-
-st.title("Indeks Ekonomi")
-graphIndeksEkonomi(st.session_state['kecamatan'])
+with st.container(border=True):
+    st.title("Indeks Ekonomi")
+    graphIndeksEkonomi(st.session_state['kecamatan'])
 
 tableEcoscope(st.session_state['kecamatan'])

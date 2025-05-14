@@ -1,10 +1,11 @@
 import streamlit as st
 import geopandas as gpd
-import folium
+import folium 
 import pandas as pd
 from streamlit_folium import st_folium
 import branca.colormap as cm
 from shapely.geometry import Point
+from folium import Element
 
 def map_path() :
     # shapefile_path = r"C:\Magang Grapari\Magang\streamlit\data\JemberSHP\ADMINISTRASIDESA_AR_25K.shp"
@@ -48,17 +49,6 @@ def mapEcoscope(kecamatan):
         'RENDAH': 'red'   # merah
 }
 
-
-    # # Sidebar filter
-    # st.sidebar.title("Filter Wilayah")
-    # kecamatan_list = sorted(gdf['WADMKC'].unique())
-    # selected_kecamatan = st.sidebar.selectbox("Pilih Kecamatan", ["Semua"] + kecamatan_list)
-    # if selected_kecamatan != "Semua":
-    #     desa_list = sorted(gdf[gdf['WADMKC'] == selected_kecamatan]['NAMOBJ'].unique())
-    # else:
-    #     desa_list = sorted(gdf['NAMOBJ'].unique())
-
-    # selected_desa = st.sidebar.selectbox("Pilih Desa", ["Semua"] + desa_list)
 
 
     selected_kecamatan = kecamatan
@@ -138,16 +128,39 @@ def mapEcoscope(kecamatan):
                 sticky=False
             )
         ).add_to(m)
+    
+    legend_image_html = """
+    <div style="
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+        background-color: white;
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
+
+        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+            <span style="height: 12px; width: 12px; background-color: green; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
+            Tinggi
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+            <span style="height: 12px; width: 12px; background-color: orange; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
+            Sedang
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span style="height: 12px; width: 12px; background-color: red; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
+            Rendah
+        </div>
+    </div>
+    """
+
+    m.get_root().html.add_child(Element(legend_image_html))
 
     # Tampilkan peta
-    st_data = st_folium(m, width=680, height=600)
+    st_data = st_folium(m, width=1000, height=600)
 
-    clicked_location = st_data.get("last_clicked")
-    if clicked_location:
-        point = Point(clicked_location["lng"], clicked_location["lat"])
-        matched_area = gdf[gdf.geometry.contains(point)]
-
-        if not matched_area.empty:
-            filter_result = matched_area
-        else:
-            filter_result = highlight_geom if highlight_geom is not None and not highlight_geom.empty else gdf
+    

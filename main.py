@@ -6,6 +6,9 @@ st.set_page_config(
         'About': 'Made by Satria Belva Nararya'
     }
 )
+with st.sidebar:
+    st.image("assets\logo_telkomsel.png", width=150)
+
 from routes import *
 from middleware import *
 

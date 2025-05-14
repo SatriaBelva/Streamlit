@@ -163,4 +163,4 @@ def map(kecamatan, desa):
     density_colormap.add_to(m)
 
     # Tampilkan peta
-    st_data = st_folium(m, width=680, height=600)
+    st_data = st_folium(m, width=1000, height=600)
