@@ -16,7 +16,7 @@ def graphPendidikan(kecamatan):
                 "D1/D2, D3, S1, S2, S3"                         : get_kuliah_data(kecamatan)["kuliah"].tolist()
             }
         )
-        st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#FFCDD0", "#F5868D", "#E30511"], height=550)
+        st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
     elif kecamatan != "Semua" : 
         dataPendidikan = pd.DataFrame(
             {
@@ -26,7 +26,7 @@ def graphPendidikan(kecamatan):
                 "D1/D2, D3, S1, S2, S3"                         : get_kuliah_data(kecamatan)["kuliah"].tolist()
             }
         )
-        st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#FFCDD0", "#F5868D", "#E30511"], height=550)
+        st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
 
 def graphPekerjaan(kecamatan):
     if kecamatan == "Semua" : 
@@ -38,7 +38,7 @@ def graphPekerjaan(kecamatan):
                 "Guru, Perawat, Pengacara"                               : get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
             }
         )
-        st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#FFCDD0", "#F5868D", "#E30511"], height=550)
+        st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
     elif kecamatan != "Semua" : 
         dataPendidikan = pd.DataFrame(
             {
@@ -48,7 +48,7 @@ def graphPekerjaan(kecamatan):
                 "Guru, Perawat, Pengacara"                               : get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
             }
         )
-        st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#FFCDD0", "#F5868D", "#E30511"], height=550)
+        st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
 
 def graphJumlahPenduduk(kecamatan):
     if kecamatan == "Semua" : 
