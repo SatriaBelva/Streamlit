@@ -21,3 +21,5 @@ langchain_community
 pymysql
 streamlit_cookies_manager
 plotly_express
+streamlit-aggrid
+altair
