@@ -59,7 +59,7 @@ def image_to_base64(image_path):
         return base64.b64encode(buffered.getvalue()).decode()
 
 # Masukkan path gambar lokal Anda
-image_path = r"D:\magang telkom 2\Streamlit\assets\foto_telkom_katanya.png"
+image_path = r"assets/foto_telkom_katanya.png"
 img_base64 = image_to_base64(image_path)
 
 # Styling header dan layout
