@@ -70,7 +70,7 @@ st.markdown("""
         }
 
         .custom-header-container {
-            background-color: #D70000;
+            background: linear-gradient(to right, #FD9B2A, #E30511);
             border-radius: 0 0 0px 80px;
             height: 135px;
             display: flex;
@@ -83,7 +83,7 @@ st.markdown("""
         }
 
         .custom-header-container img {
-            height: 135px;
+            height: 128px;
 
         }
 
@@ -116,7 +116,7 @@ st.markdown(f"""
     <div class="custom-header-container">
         <img src="data:image/png;base64,{img_base64}" alt="Header Image"/>
         <div class="header-text-container">
-            <div class="custom-header-title">Populitycs Kabupaten Jember</div>
+            <div class="custom-header-title">ADO Mobile</div>
             <div class="custom-header-subtitle">Data pada fitur ini merupakan data IPM Kabupaten<br>Jember</div>
         </div>
     </div>

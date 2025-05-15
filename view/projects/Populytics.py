@@ -26,7 +26,7 @@ st.markdown("""
         }
 
         .custom-header-container {
-            background-color: #D70000;
+            background: linear-gradient(to right, #FD9B2A, #E30511);
             border-radius: 0 0 0px 80px;
             height: 135px;
             display: flex;
@@ -39,7 +39,7 @@ st.markdown("""
         }
 
         .custom-header-container img {
-            height: 135px;
+            height: 128px;
 
         }
 
@@ -155,7 +155,7 @@ st.markdown("""
     <style>
         /* Header container */
         .custom-header2-container {
-            background-color: #D70000;
+            background: linear-gradient(to right, #FD9B2A, #E30511);
             border-radius: 8px 80px 8px 80px;
             height: 135px;
             display: flex;
