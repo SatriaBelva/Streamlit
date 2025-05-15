@@ -22,25 +22,28 @@ def tableADOIH() :
 
     # Custom CSS styles
     custom_css = {
-        ".ag-header-group-cell": {
-            "background-color": "#D70000",
-            "color": "white",
-            "font-weight": "bold",
+        ".ag-header-cell-label": {
+            "justify-content": "center",
+            "display": "flex",
+            "align-items": "center",
+            "text-align": "center"
+        },
+        ".ag-header-cell": {
+            "text-align": "center",
+            "border-right": "1px solid #ccc",
+            "border-bottom": "1px solid #ccc"
+        },
+        ".ag-cell": {
+            "border-right": "1px solid #ccc",
+            "border-bottom": "1px solid #ccc",
+            "text-align": "center"
         },
         ".ag-row-even": {
             "background-color": "#f5f5f5"
         },
         ".ag-row-odd": {
             "background-color": "white"
-        },
-        ".ag-cell": {
-            "border-right": "1px solid #ccc",
-            "border-bottom": "1px solid #ccc",
-        },
-        ".ag-header-cell": {
-            "border-right": "1px solid #ccc",
-            "border-bottom": "1px solid #ccc",
-        },
+        }
     }
 
     AgGrid(

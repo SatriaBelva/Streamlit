@@ -45,7 +45,20 @@ def graph_ListAktif_TotalHousehold():
         ]
     ).properties(height=550)
 
-    return st.altair_chart(chart, use_container_width=True)
+    text = alt.Chart(df_melted).mark_text(
+        align="center",
+        baseline="bottom",
+        dy=-5,
+        color="black"
+    ).encode(
+        x=alt.X("Kabupaten:N", sort=None),
+        y=alt.Y("Jumlah:Q", stack="zero"),
+        text=alt.Text("Jumlah:Q", format=","),
+        detail="Kategori:N"
+    )
+
+    st.altair_chart(chart + text, use_container_width=True)
+
 
 def graph_PortAvail_TotalPort():
     dataPendidikan = pd.DataFrame(
@@ -86,7 +99,20 @@ def graph_PortAvail_TotalPort():
             alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
         ]
     ).properties(height=550)
-    return st.altair_chart(chart, use_container_width=True)
+    text = alt.Chart(df_melted).mark_text(
+        align="center",
+        baseline="bottom",
+        dy=-5,
+        color="black"
+    ).encode(
+        x=alt.X("Kabupaten:N", sort=None),
+        y=alt.Y("Jumlah:Q", stack="zero"),
+        text=alt.Text("Jumlah:Q", format=","),
+        detail="Kategori:N"
+    )
+
+    st.altair_chart(chart + text, use_container_width=True)
+
 
 # def graph_WifiShare():
 #     dataPendidikan = pd.DataFrame(

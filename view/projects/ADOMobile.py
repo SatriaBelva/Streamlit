@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 from controller import *
 from model import *
+from PIL import Image
+import base64
+from io import BytesIO
 
 # col1, col2 = st.columns(2)
 
@@ -49,25 +52,47 @@ from model import *
 # """, unsafe_allow_html=True)
 
 
+def image_to_base64(image_path):
+    with Image.open(image_path) as img:
+        buffered = BytesIO()
+        img.save(buffered, format="PNG")
+        return base64.b64encode(buffered.getvalue()).decode()
+
+# Masukkan path gambar lokal Anda
+image_path = r"D:\magang telkom 2\Streamlit\assets\foto_telkom_katanya.png"
+img_base64 = image_to_base64(image_path)
+
+# Styling header dan layout
 st.markdown("""
     <style>
-        /* Hilangkan margin dan padding default body Streamlit */
         .main > div:first-child {
             padding-top: 0rem;
         }
 
-        /* Header container */
         .custom-header-container {
             background-color: #D70000;
             border-radius: 0 0 0px 80px;
             height: 135px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
             color: white;
             margin-top: -3.5rem;
             margin-bottom: 2rem;
+            padding-left: 50px;
+            padding-right: 158px;
+        }
+
+        .custom-header-container img {
+            height: 135px;
+
+        }
+
+        .header-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
         }
 
         .custom-header-title {
@@ -78,6 +103,8 @@ st.markdown("""
 
         .custom-header-subtitle {
             font-size: 16px;
+            text-align: center;
+            width: 80%;
             font-weight: normal;
             margin: 0;
         }
@@ -85,10 +112,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Tampilkan header
-st.markdown("""
+st.markdown(f"""
     <div class="custom-header-container">
-        <div class="custom-header-title">ADO Mobile</div>
-        <div class="custom-header-subtitle">Data pada fitur ini merupakan data IPM Kabupaten Jember</div>
+        <img src="data:image/png;base64,{img_base64}" alt="Header Image"/>
+        <div class="header-text-container">
+            <div class="custom-header-title">Populitycs Kabupaten Jember</div>
+            <div class="custom-header-subtitle">Data pada fitur ini merupakan data IPM Kabupaten<br>Jember</div>
+        </div>
     </div>
 """, unsafe_allow_html=True)
 

@@ -43,8 +43,20 @@ def graphCB_Populasi():
             alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
         ]
     ).properties(height=550)
+    
+    text = alt.Chart(df_melted).mark_text(
+        align="center",
+        baseline="bottom",
+        dy=-5,
+        color="black"
+    ).encode(
+        x=alt.X("Kabupaten:N", sort=None),
+        y=alt.Y("Jumlah:Q", stack="zero"),
+        text=alt.Text("Jumlah:Q", format=","),
+        detail="Kategori:N"
+    )
 
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart + text, use_container_width=True)
 
 def graph_FBREG_FBYouth():
     dataPendidikan = pd.DataFrame(
@@ -112,26 +124,56 @@ def graph_OUTLETPJP_pie():
 
     st.plotly_chart(fig, use_container_width=True)
 
-def graph_Arpu():
-    dataPendidikan = pd.DataFrame(
-        {
-            "Kabupaten" : get_Kabupaten_data(),
-            "ARPU"      : get_Arpu_data(),
-        }
-    )
+# def graph_Arpu():
+#     dataPendidikan = pd.DataFrame(
+#         {
+#             "Kabupaten" : get_Kabupaten_data(),
+#             "ARPU"      : get_Arpu_data(),
+#         }
+#     )
 
-    # Misalnya mau ditampilkan dalam chart:
+#     # Misalnya mau ditampilkan dalam chart:
+#     chart = alt.Chart(dataPendidikan).mark_bar().encode(
+#         x=alt.X("Kabupaten:N", sort=list(dataPendidikan["Kabupaten"])),
+#         y=alt.Y("ARPU:Q"),
+#         color=alt.value("#E30511"),
+#         tooltip=[
+#             alt.Tooltip("Kabupaten:N"),
+#             alt.Tooltip("ARPU:Q", format=","),
+#         ]
+#     ).properties(height=550)
+
+#     return st.altair_chart(chart, use_container_width=True)
+
+def graph_Arpu():
+    dataPendidikan = pd.DataFrame({
+        "Kabupaten": get_Kabupaten_data(),
+        "ARPU": get_Arpu_data(),
+    })
+
+    # Bar chart
     chart = alt.Chart(dataPendidikan).mark_bar().encode(
         x=alt.X("Kabupaten:N", sort=list(dataPendidikan["Kabupaten"])),
         y=alt.Y("ARPU:Q"),
         color=alt.value("#E30511"),
         tooltip=[
             alt.Tooltip("Kabupaten:N"),
-            alt.Tooltip("ARPU:Q", format=","),
+            alt.Tooltip("ARPU:Q", format=",")
         ]
     ).properties(height=550)
 
-    return st.altair_chart(chart, use_container_width=True)
+    # Label text di atas bar
+    text = alt.Chart(dataPendidikan).mark_text(
+        align="center",
+        baseline="bottom",
+        dy=-5
+    ).encode(
+        x=alt.X("Kabupaten:N"),
+        y="ARPU:Q",
+        text=alt.Text("ARPU:Q", format=",")
+    )
+
+    return st.altair_chart(chart + text, use_container_width=True)
 
 # def graph_Site():
 #     dataPendidikan = pd.DataFrame(

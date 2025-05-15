@@ -32,32 +32,36 @@ def get_color(value):
         return '#229122'
 
 def graphIndeksEkonomi(kecamatan):
-    if kecamatan == "Semua" : 
-        dataPendidikan = pd.DataFrame(
-            {
-                "Kecamatan"          : get_kecamatan_data()["nama"].tolist(),
-                "Indeks Ekonomi"     : get_indeks_ekonomi(kecamatan)["Indeks Ekonomi"].tolist(),
-            }
-        )
-    elif kecamatan != "Semua" : 
-        dataPendidikan = pd.DataFrame(
-            {
-                "Kecamatan"    : get_kecamatan_data()["nama"].tolist(),
-                "Indeks Ekonomi"                            : get_indeks_ekonomi(kecamatan)["Indeks Ekonomi"].tolist()
-            }
-        )
+    if kecamatan == "Semua":
+        df = pd.DataFrame({
+            "Kecamatan": get_kecamatan_data()["nama"].tolist(),
+            "Indeks Ekonomi": get_indeks_ekonomi(kecamatan)["Indeks Ekonomi"].tolist(),
+        })
+    else:
+        df = pd.DataFrame({
+            "Kecamatan": get_kecamatan_data()["nama"].tolist(),
+            "Indeks Ekonomi": get_indeks_ekonomi(kecamatan)["Indeks Ekonomi"].tolist(),
+        })
 
-    dataPendidikan["Warna"] = dataPendidikan["Indeks Ekonomi"].apply(get_color)
+    df["Warna"] = df["Indeks Ekonomi"].apply(get_color)
 
-    # Chart dengan Altair
-    chart = alt.Chart(dataPendidikan).mark_bar().encode(
+    # Bar chart
+    bar = alt.Chart(df).mark_bar().encode(
         x=alt.X('Kecamatan:N', sort=None),
         y=alt.Y('Indeks Ekonomi:Q'),
         color=alt.Color('Warna:N', scale=None, legend=None),
         tooltip=['Kecamatan', 'Indeks Ekonomi']
-    ).properties(
-        height=550,
-        width=900
+    ).properties(height=550, width=900)
+
+    # Text label di atas bar
+    text = alt.Chart(df).mark_text(
+        align='center',
+        baseline='bottom',
+        dy=-5
+    ).encode(
+        x=alt.X('Kecamatan:N'),
+        y=alt.Y('Indeks Ekonomi:Q'),
+        text=alt.Text('Indeks Ekonomi:Q', format=".1f")  # satu angka di belakang koma
     )
 
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(bar + text, use_container_width=True)
