@@ -120,23 +120,21 @@ with colText :
         # st.markdown("### Ajukan pertanyaan lain:")
         user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        # qa = load_chatbot_popu()
+        qa = load_chatbot_popu()
         
-        # with st.spinner("Sedang mencari jawaban..."):
-        #     default_result = get_chatbot_response_popu(qa, default_query)
-        #     st.markdown(default_result["result"])
+        if user_query and user_query.strip() != "":
+            with st.spinner("Sedang mencari jawaban..."):
+                result = get_chatbot_response_popu(qa, user_query)
+                st.markdown("### Jawaban dari pertanyaan Anda:")
+                st.markdown(result["result"])
 
-        # # Garis pemisah
-        # st.markdown("---")
-
-        # final_query = user_query if user_query.strip() != "" else default_query
-
-
-        # if final_query:
-        #     with st.spinner("Sedang mencari jawaban..."):
-        #         user_result = get_chatbot_response_popu(qa, final_query)
-        #         st.markdown("### Jawaban dari pertanyaan Anda:")
-        #         st.markdown(user_result["result"])
+        # Jika user tidak mengisi apapun, tampilkan default query
+        elif user_query is None:
+            with st.spinner("Sedang mencari jawaban..."):
+                result = get_chatbot_response_popu(qa, default_query)
+                st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
+                st.markdown(result["result"])
+                
 with st.container(border=True):            
     st.title("Pendidikan")
     graphPendidikan(st.session_state['kecamatan'])

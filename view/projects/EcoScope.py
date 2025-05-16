@@ -106,28 +106,24 @@ with colText :
         st.title(f"kec. {selected_kecamatan}")
         st.caption("Rekomendasi")
         
-        default_query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"
-
-        # Input pertanyaan manual dari user (di bawah)
-        # st.markdown("### Ajukan pertanyaan lain:")
+        default_query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"      
         user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
+        
+        qa = load_chatbot_eco()
+        
+        if user_query and user_query.strip() != "":
+            with st.spinner("Sedang mencari jawaban..."):
+                result = get_chatbot_response_eco(qa, user_query)
+                st.markdown("### Jawaban dari pertanyaan Anda:")
+                st.markdown(result["result"])
 
-        # qa = load_chatbot_eco()
-        # with st.spinner("Sedang mencari jawaban..."):
-        #     default_result = get_chatbot_response_eco(qa, default_query)
-        #     st.markdown(default_result["result"])
-
-        # # Garis pemisah
-        # st.markdown("---")
-
-        # final_query = user_query if user_query.strip() != "" else default_query
-
-
-        # if final_query:
-        #     with st.spinner("Sedang mencari jawaban..."):
-        #         user_result = get_chatbot_response_eco(qa, final_query)
-        #         st.markdown("### Jawaban dari pertanyaan Anda:")
-        #         st.markdown(user_result["result"])
+        # Jika user tidak mengisi apapun, tampilkan default query
+        elif user_query is None:
+            with st.spinner("Sedang mencari jawaban..."):
+                result = get_chatbot_response_eco(qa, default_query)
+                st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
+                st.markdown(result["result"])
+                
 with st.container(border=True):
     st.title("Indeks Ekonomi")
     graphIndeksEkonomi(st.session_state['kecamatan'])

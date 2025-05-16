@@ -11,6 +11,8 @@ import streamlit as st
 #blabla
 @st.cache_resource
 def load_chatbot_popu():
+    os.environ["OPENAI_API_KEY"] = "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"
+
     loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
     documents = loader.load()
 
@@ -21,9 +23,9 @@ def load_chatbot_popu():
     vectorstore = FAISS.from_documents(chunks, embedding=embeddings)
 
     llm = ChatOpenAI(
-        model_name="google/gemini-2.0-flash-exp:free",
-        openai_api_key="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",
-        openai_api_base="https://openrouter.ai/api/v1"
+        model_name="meta-llama/llama-4-scout:free",
+        # openai_api_key="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",
+        openai_api_base="https://openrouter.ai/api/v1",
     )
 
     prompt_template = """Anda adalah asisten digital Telkomsel.
@@ -41,7 +43,7 @@ Jawaban akurat dan lengkap berdasarkan data di atas:"""
 
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
-        retriever=vectorstore.as_retriever(search_kwargs={"k": 100}),
+        retriever=vectorstore.as_retriever(search_kwargs={"k": 50}),
         chain_type="stuff",
         chain_type_kwargs={"prompt": prompt},
         return_source_documents=True

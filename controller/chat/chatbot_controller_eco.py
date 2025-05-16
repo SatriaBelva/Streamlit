@@ -11,20 +11,23 @@ import streamlit as st
 #blabla
 @st.cache_resource
 def load_chatbot_eco():
+    os.environ["OPENAI_API_KEY"] = "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"
+
     loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
     documents = loader.load()
 
-    splitter = RecursiveCharacterTextSplitter(chunk_size=2500, chunk_overlap=800)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=700)
     chunks = splitter.split_documents(documents)
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     vectorstore = FAISS.from_documents(chunks, embedding=embeddings)
 
     llm = ChatOpenAI(
-        model_name="google/gemini-2.0-flash-exp:free",
-        openai_api_key="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",
-        # openai_api_key="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", #cadangan
+        model_name="meta-llama/llama-4-scout:free",
+        # openai_api_key="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",
+        max_tokens=30000,
         openai_api_base="https://openrouter.ai/api/v1"
+        
     )
 
     prompt_template = """Anda adalah asisten digital Telkomsel.
@@ -42,7 +45,7 @@ Jawaban akurat dan lengkap berdasarkan data di atas:"""
 
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
-        retriever=vectorstore.as_retriever(search_kwargs={"k": 100}),
+        retriever=vectorstore.as_retriever(search_kwargs={"k": 50}),
         chain_type="stuff",
         chain_type_kwargs={"prompt": prompt},
         return_source_documents=True
