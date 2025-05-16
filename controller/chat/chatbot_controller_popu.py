@@ -11,7 +11,7 @@ import streamlit as st
 #blabla
 @st.cache_resource
 def load_chatbot_popu():
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = "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"
 
     loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
     documents = loader.load()
