@@ -25,9 +25,7 @@ def load_chatbot_eco():
     llm = ChatOpenAI(
         model_name="meta-llama/llama-4-scout:free",
         # openai_api_key="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",
-        max_tokens=30000,
-        openai_api_base="https://openrouter.ai/api/v1"
-        
+        openai_api_base="https://openrouter.ai/api/v1"  
     )
 
     prompt_template = """Anda adalah asisten digital Telkomsel.
