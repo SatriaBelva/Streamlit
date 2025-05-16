@@ -7,49 +7,179 @@ import altair as alt
 
 # dataKecamatan = kecamatan_list()
 
+# def graphPendidikan(kecamatan):
+#     if kecamatan == "Semua" : 
+#         dataPendidikan = pd.DataFrame(
+#             {
+#                 "Kecamatan"                                     : get_kecamatan_data()["nama"].tolist(),
+#                 "Tidak/putus sekolah, belum tamat SD, tamat SD" : get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
+#                 "SLTP/SLTA"                                     : get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
+#                 "D1/D2, D3, S1, S2, S3"                         : get_kuliah_data(kecamatan)["kuliah"].tolist()
+#             }
+#         )
+#         st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
+#     elif kecamatan != "Semua" : 
+#         dataPendidikan = pd.DataFrame(
+#             {
+#                 f"Kelurahan di {kecamatan.capitalize()}"        : get_kelurahan_data(kecamatan)["nama"].tolist(),
+#                 "Tidak/putus sekolah, belum tamat SD, tamat SD" : get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
+#                 "SLTP/SLTA"                                     : get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
+#                 "D1/D2, D3, S1, S2, S3"                         : get_kuliah_data(kecamatan)["kuliah"].tolist()
+#             }
+#         )
+#         st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
+
 def graphPendidikan(kecamatan):
-    if kecamatan == "Semua" : 
-        dataPendidikan = pd.DataFrame(
-            {
-                "Kecamatan"                                     : get_kecamatan_data()["nama"].tolist(),
-                "Tidak/putus sekolah, belum tamat SD, tamat SD" : get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
-                "SLTP/SLTA"                                     : get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
-                "D1/D2, D3, S1, S2, S3"                         : get_kuliah_data(kecamatan)["kuliah"].tolist()
-            }
+    if kecamatan == "Semua":
+        df = pd.DataFrame({
+            "Kecamatan": get_kecamatan_data()["nama"].tolist(),
+            "Tidak/putus sekolah, belum tamat SD, tamat SD": get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
+            "SLTP/SLTA": get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
+            "D1/D2, D3, S1, S2, S3": get_kuliah_data(kecamatan)["kuliah"].tolist()
+        })
+
+        df_melt = df.melt(id_vars="Kecamatan", var_name="Kategori", value_name="Jumlah")
+
+        chart = alt.Chart(df_melt).mark_bar().encode(
+            x=alt.X("Kecamatan:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            color=alt.Color("Kategori:N", scale=alt.Scale(range=["#229122", "#FD9B2A", "#E30511"]), legend=alt.Legend(orient="top")),
+            tooltip=["Kecamatan:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")]
+        ).properties(height=550)
+
+        text = alt.Chart(df_melt).mark_text(
+            align="center",
+            baseline="middle",
+            dy=-5,
+            color="black"
+        ).encode(
+            x=alt.X("Kecamatan:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            text=alt.Text("Jumlah:Q", format=",")
         )
-        st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
-    elif kecamatan != "Semua" : 
-        dataPendidikan = pd.DataFrame(
-            {
-                f"Kelurahan di {kecamatan.capitalize()}"        : get_kelurahan_data(kecamatan)["nama"].tolist(),
-                "Tidak/putus sekolah, belum tamat SD, tamat SD" : get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
-                "SLTP/SLTA"                                     : get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
-                "D1/D2, D3, S1, S2, S3"                         : get_kuliah_data(kecamatan)["kuliah"].tolist()
-            }
+
+        st.altair_chart(chart + text, use_container_width=True)
+
+    else:
+        label = f"Kelurahan di {kecamatan.capitalize()}"
+        df = pd.DataFrame({
+            label: get_kelurahan_data(kecamatan)["nama"].tolist(),
+            "Tidak/putus sekolah, belum tamat SD, tamat SD": get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
+            "SLTP/SLTA": get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
+            "D1/D2, D3, S1, S2, S3": get_kuliah_data(kecamatan)["kuliah"].tolist()
+        })
+
+        df_melt = df.melt(id_vars=label, var_name="Kategori", value_name="Jumlah")
+
+        chart = alt.Chart(df_melt).mark_bar().encode(
+            x=alt.X(f"{label}:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            color=alt.Color("Kategori:N", scale=alt.Scale(range=["#229122", "#FD9B2A", "#E30511"]), legend=alt.Legend(orient="top")),
+            tooltip=[f"{label}:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")]
+        ).properties(height=550)
+
+        text = alt.Chart(df_melt).mark_text(
+            align="center",
+            baseline="middle",
+            dy=-5,
+            color="black"
+        ).encode(
+            x=alt.X(f"{label}:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            text=alt.Text("Jumlah:Q", format=",")
         )
-        st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/putus sekolah, belum tamat SD, tamat SD", "SLTP/SLTA", "D1/D2, D3, S1, S2, S3"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
+
+        st.altair_chart(chart + text, use_container_width=True)
+
+# def graphPekerjaan(kecamatan):
+#     if kecamatan == "Semua" : 
+#         dataPendidikan = pd.DataFrame(
+#             {
+#                 "Kecamatan"                                              : get_kecamatan_data()["nama"].tolist(),
+#                 "Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan" : get_firstCategory_data(kecamatan)["Category 1"].tolist(),
+#                 "Perdagangan, Wiraswasta, Nelayan"                       : get_secondCategory_data(kecamatan)["Category 2"].tolist(),
+#                 "Guru, Perawat, Pengacara"                               : get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
+#             }
+#         )
+#         st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
+#     elif kecamatan != "Semua" : 
+#         dataPendidikan = pd.DataFrame(
+#             {
+#                 f"Kelurahan di {kecamatan.capitalize()}"                 : get_kelurahan_data(kecamatan)["nama"].tolist(),
+#                 "Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan" : get_firstCategory_data(kecamatan)["Category 1"].tolist(),
+#                 "Perdagangan, Wiraswasta, Nelayan"                       : get_secondCategory_data(kecamatan)["Category 2"].tolist(),
+#                 "Guru, Perawat, Pengacara"                               : get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
+#             }
+#         )
+#         st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
 
 def graphPekerjaan(kecamatan):
-    if kecamatan == "Semua" : 
-        dataPendidikan = pd.DataFrame(
-            {
-                "Kecamatan"                                              : get_kecamatan_data()["nama"].tolist(),
-                "Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan" : get_firstCategory_data(kecamatan)["Category 1"].tolist(),
-                "Perdagangan, Wiraswasta, Nelayan"                       : get_secondCategory_data(kecamatan)["Category 2"].tolist(),
-                "Guru, Perawat, Pengacara"                               : get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
-            }
+    if kecamatan == "Semua":
+        df = pd.DataFrame({
+            "Kecamatan": get_kecamatan_data()["nama"].tolist(),
+            "Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan": get_firstCategory_data(kecamatan)["Category 1"].tolist(),
+            "Perdagangan, Wiraswasta, Nelayan": get_secondCategory_data(kecamatan)["Category 2"].tolist(),
+            "Guru, Perawat, Pengacara": get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
+        })
+
+        df_melt = df.melt(id_vars="Kecamatan", var_name="Kategori", value_name="Jumlah")
+
+        chart = alt.Chart(df_melt).mark_bar().encode(
+            x=alt.X("Kecamatan:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            color=alt.Color("Kategori:N", scale=alt.Scale(range=["#229122", "#FD9B2A", "#E30511"]), legend=alt.Legend(orient="top")),
+            tooltip=["Kecamatan:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")]
+        ).properties(height=550)
+
+        text = alt.Chart(df_melt).mark_text(
+            align="center",
+            baseline="middle",
+            dy=-5,
+            color="black"
+        ).encode(
+            x=alt.X("Kecamatan:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            text=alt.Text("Jumlah:Q", format=",")
         )
-        st.bar_chart(dataPendidikan, x="Kecamatan", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
-    elif kecamatan != "Semua" : 
-        dataPendidikan = pd.DataFrame(
-            {
-                f"Kelurahan di {kecamatan.capitalize()}"                 : get_kelurahan_data(kecamatan)["nama"].tolist(),
-                "Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan" : get_firstCategory_data(kecamatan)["Category 1"].tolist(),
-                "Perdagangan, Wiraswasta, Nelayan"                       : get_secondCategory_data(kecamatan)["Category 2"].tolist(),
-                "Guru, Perawat, Pengacara"                               : get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
-            }
+
+
+        st.altair_chart(chart + text, use_container_width=True)
+
+    else:
+        label = f"Kelurahan di {kecamatan.capitalize()}"
+        df = pd.DataFrame({
+            label: get_kelurahan_data(kecamatan)["nama"].tolist(),
+            "Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan": get_firstCategory_data(kecamatan)["Category 1"].tolist(),
+            "Perdagangan, Wiraswasta, Nelayan": get_secondCategory_data(kecamatan)["Category 2"].tolist(),
+            "Guru, Perawat, Pengacara": get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
+        })
+
+        df_melt = df.melt(id_vars=label, var_name="Kategori", value_name="Jumlah")
+
+        chart = alt.Chart(df_melt).mark_bar().encode(
+            x=alt.X(f"{label}:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            color=alt.Color(
+                "Kategori:N",
+                scale=alt.Scale(range=["#229122", "#FD9B2A", "#E30511"]),
+                legend=alt.Legend(orient="top")
+            ),
+            tooltip=[f"{label}:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")]
+        ).properties(height=550)
+
+        text = alt.Chart(df_melt).mark_text(
+            align="center",
+            baseline="middle",
+            dy=-5,
+            color="black"
+        ).encode(
+            x=alt.X(f"{label}:N", sort=None),
+            y=alt.Y("Jumlah:Q", stack="zero"),
+            text=alt.Text("Jumlah:Q", format=","),
+            detail="Kategori:N"
         )
-        st.bar_chart(dataPendidikan, x=f"Kelurahan di {kecamatan.capitalize()}", y=["Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan", "Perdagangan, Wiraswasta, Nelayan", "Guru, Perawat, Pengacara"], horizontal=False, stack=True, color=["#229122", "#FD9B2A", "#E30511"], height=550)
+        
+        st.altair_chart(chart + text, use_container_width=True)
 
 # def graphJumlahPenduduk(kecamatan):
 #     if kecamatan == "Semua" : 

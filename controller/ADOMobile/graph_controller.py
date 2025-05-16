@@ -83,8 +83,25 @@ def graph_FBREG_FBYouth():
             alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
         ]
     ).properties(height=550)
+    
+    text = (
+        alt.Chart(df_melted)
+        .mark_text(
+            dy=-5,  # sedikit naik di atas bar
+            color="black",
+            align="center",
+            baseline="bottom",
+            size=12,
+        )
+        .encode(
+            x=alt.X("Kabupaten:N", sort=None),
+            y=alt.Y("Jumlah:Q"),
+            text=alt.Text("Jumlah:Q", format=".2f"),  # format angka dengan 2 desimal
+            xOffset="Kategori:N",
+        )
+    )
 
-    return st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart + text, use_container_width=True)
     
 # def graph_OUTLETPJP():
 #     dataPendidikan = pd.DataFrame(
