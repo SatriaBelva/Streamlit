@@ -110,7 +110,7 @@ with colMap :
 with colText :
     with st.container(border=True, height=600):
 
-        st.title(f"kec. {selected_kecamatan} desa {selected_desa}")
+        st.header(f"Kec. {selected_kecamatan} Desa {selected_desa}")
         st.caption("Rekomendasi")
 
         # Pertanyaan otomatis

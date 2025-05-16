@@ -103,7 +103,7 @@ with colMap :
     # pass
 with colText :
     with st.container(border=True, height=600):
-        st.title(f"kec. {selected_kecamatan}")
+        st.header(f"Kec. {selected_kecamatan}")
         st.caption("Rekomendasi")
         
         default_query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"      
@@ -123,7 +123,7 @@ with colText :
                 result = get_chatbot_response_eco(qa, default_query)
                 st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
                 st.markdown(result["result"])
-                
+
 with st.container(border=True):
     st.title("Indeks Ekonomi")
     graphIndeksEkonomi(st.session_state['kecamatan'])
