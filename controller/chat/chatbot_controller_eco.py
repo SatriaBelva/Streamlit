@@ -14,7 +14,7 @@ def load_chatbot_eco():
     os.environ["OPENAI_API_KEY"] = "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"
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectorstore = FAISS.load_local(r"D:\magang telkom 2\Streamlit\controller\chat\vector_index\popu_index",embeddings,allow_dangerous_deserialization=True)
+    vectorstore = FAISS.load_local(r"controller/chat/vector_index/popu_index",embeddings,allow_dangerous_deserialization=True)
 
 
     llm = ChatOpenAI(

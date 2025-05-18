@@ -12,7 +12,7 @@ def load_chatbot_popu():
     os.environ["OPENAI_API_KEY"] = "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"
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectorstore = FAISS.load_local(r"D:\magang telkom 2\Streamlit\controller\chat\vector_index\popu_index",embeddings,allow_dangerous_deserialization=True)
+    vectorstore = FAISS.load_local(r"controller/chat/vector_index/popu_index",embeddings,allow_dangerous_deserialization=True)
 
 
     llm = ChatOpenAI(
