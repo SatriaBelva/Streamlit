@@ -103,28 +103,7 @@ def graph_FBREG_FBYouth():
 
     st.altair_chart(chart + text, use_container_width=True)
     
-# def graph_OUTLETPJP():
-#     dataPendidikan = pd.DataFrame(
-#         {
-#             "Kabupaten": get_Kabupaten_data(),
-#             "OUTLET PJP": get_OUTLETPJP_data(),
-#         }
-#     )
-
-#     # Misalnya mau ditampilkan dalam chart:
-#     chart = alt.Chart(dataPendidikan).mark_bar().encode(
-#         x=alt.X("Kabupaten:N", sort=list(dataPendidikan["Kabupaten"])),
-#         y=alt.Y("OUTLET PJP:Q"),
-#         color=alt.value("#E30511"),
-#         tooltip=[
-#             alt.Tooltip("Kabupaten:N"),
-#             alt.Tooltip("OUTLET PJP:Q", format=","),
-#         ]
-#     ).properties(height=550)
-
-#     return st.altair_chart(chart, use_container_width=True)
-
-def graph_OUTLETPJP_pie():
+def graph_OUTLETPJP():
     dataPendidikan = pd.DataFrame(
         {
             "Kabupaten": get_Kabupaten_data(),
@@ -132,14 +111,44 @@ def graph_OUTLETPJP_pie():
         }
     )
 
-    fig = px.pie(
-        dataPendidikan,
-        values="OUTLET PJP",
-        names="Kabupaten",
-        color_discrete_sequence=px.colors.sequential.RdBu
+    # Misalnya mau ditampilkan dalam chart:
+    chart = alt.Chart(dataPendidikan).mark_bar().encode(
+        x=alt.X("Kabupaten:N", sort=list(dataPendidikan["Kabupaten"])),
+        y=alt.Y("OUTLET PJP:Q"),
+        color=alt.value("#E30511"),
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("OUTLET PJP:Q", format=","),
+        ]
+    ).properties(height=550)
+    text = alt.Chart(dataPendidikan).mark_text(
+        align="center",
+        baseline="bottom",
+        dy=-5
+    ).encode(
+        x=alt.X("Kabupaten:N"),
+        y="OUTLET PJP:Q",
+        text=alt.Text("OUTLET PJP:Q", format=",")
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    return st.altair_chart(chart + text, use_container_width=True)
+
+# def graph_OUTLETPJP_pie():
+#     dataPendidikan = pd.DataFrame(
+#         {
+#             "Kabupaten": get_Kabupaten_data(),
+#             "OUTLET PJP": get_OUTLETPJP_data(),
+#         }
+#     )
+
+#     fig = px.pie(
+#         dataPendidikan,
+#         values="OUTLET PJP",
+#         names="Kabupaten",
+#         color_discrete_sequence=px.colors.sequential.RdBu
+#     )
+
+#     st.plotly_chart(fig, use_container_width=True)
 
 # def graph_Arpu():
 #     dataPendidikan = pd.DataFrame(
@@ -192,7 +201,37 @@ def graph_Arpu():
 
     return st.altair_chart(chart + text, use_container_width=True)
 
-# def graph_Site():
+def graph_Site():
+    dataPendidikan = pd.DataFrame(
+        {
+            "Kabupaten" : get_Kabupaten_data(),
+            "SITE"      :  get_Site_data(),
+        }
+    )
+    # Misalnya mau ditampilkan dalam chart:
+    chart = alt.Chart(dataPendidikan).mark_bar().encode(
+        x=alt.X("Kabupaten:N", sort=list(dataPendidikan["Kabupaten"])),
+        y=alt.Y("SITE:Q"),
+        color=alt.value("#E30511"),
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("SITE:Q", format=","),
+        ]
+    ).properties(height=550)
+
+    text = alt.Chart(dataPendidikan).mark_text(
+        align="center",
+        baseline="bottom",
+        dy=-5
+    ).encode(
+        x=alt.X("Kabupaten:N"),
+        y="SITE:Q",
+        text=alt.Text("SITE:Q", format=",")
+    )
+
+    return st.altair_chart(chart + text, use_container_width=True)
+
+# def graph_Site_pie():
 #     dataPendidikan = pd.DataFrame(
 #         {
 #             "Kabupaten" : get_Kabupaten_data(),
@@ -200,34 +239,13 @@ def graph_Arpu():
 #         }
 #     )
 
-#     # Misalnya mau ditampilkan dalam chart:
-#     chart = alt.Chart(dataPendidikan).mark_bar().encode(
-#         x=alt.X("Kabupaten:N", sort=list(dataPendidikan["Kabupaten"])),
-#         y=alt.Y("SITE:Q"),
-#         color=alt.value("#E30511"),
-#         tooltip=[
-#             alt.Tooltip("Kabupaten:N"),
-#             alt.Tooltip("SITE:Q", format=","),
-#         ]
-#     ).properties(height=550)
+#     fig = px.pie(
+#         dataPendidikan,
+#         values="SITE",
+#         names="Kabupaten",
+#         color_discrete_sequence=px.colors.sequential.RdBu
+#     )
 
-#     return st.altair_chart(chart, use_container_width=True)
-
-def graph_Site_pie():
-    dataPendidikan = pd.DataFrame(
-        {
-            "Kabupaten" : get_Kabupaten_data(),
-            "SITE"      :  get_Site_data(),
-        }
-    )
-
-    fig = px.pie(
-        dataPendidikan,
-        values="SITE",
-        names="Kabupaten",
-        color_discrete_sequence=px.colors.sequential.RdBu
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
+#     st.plotly_chart(fig, use_container_width=True)
 
     

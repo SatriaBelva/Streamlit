@@ -7,23 +7,23 @@ from langchain.prompts import PromptTemplate
 import streamlit as st
 
 #blabla
-@st.cache_resource  
+@st.cache_resource
 def load_chatbot_eco():
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = "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"
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     vectorstore = FAISS.load_local(r"controller/chat/vector_index_eco/eco_index",embeddings,allow_dangerous_deserialization=True)
 
 
     llm = ChatOpenAI(
-        model_name="google/gemini-2.0-flash-exp:free",
+        model_name="meta-llama/llama-4-scout:free",
         openai_api_base="https://openrouter.ai/api/v1"
     )
 
     prompt_template = """Anda adalah asisten digital Telkomsel...
 Jawablah pertanyaan pengguna *hanya* berdasarkan informasi berikut:
 
-{context}
+{context}   
 
 Pertanyaan: {question}
 Jawaban akurat dan lengkap berdasarkan data di atas:"""
@@ -45,3 +45,4 @@ Jawaban akurat dan lengkap berdasarkan data di atas:"""
 
 def get_chatbot_response_eco(qa, query):
     return qa(query)
+

@@ -5,6 +5,7 @@ import pandas as pd
 from streamlit_folium import st_folium
 import branca.colormap as cm
 from shapely.geometry import Point
+from folium import Element
 
 def map_path() :
     # shapefile_path = r"C:\Magang Grapari\Magang\streamlit\data\JemberSHP\ADMINISTRASIDESA_AR_25K.shp"
@@ -161,6 +162,39 @@ def map(kecamatan, desa):
             )
         ).add_to(m)
     density_colormap.add_to(m)
+
+    legend_image_html = """
+    <div style="
+        position: fixed;
+        top: 30px;
+        right: 10px;
+        z-index: 9999;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: extra-bold;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: row;
+        gap: 14px;
+        background: none;
+    ">
+
+        <div style="display: flex; align-items: center;">
+            <span style="height: 12px; width: 12px; background-color: green; border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
+            Kepadatan Rendah
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span style="height: 12px; width: 12px; background-color: orange; border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
+            Kepadatan Sedang
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span style="height: 12px; width: 12px; background-color: red; border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
+            Kepadatan Tinggi
+        </div>
+    </div>
+    """
+
+    m.get_root().html.add_child(Element(legend_image_html))
 
     # Tampilkan peta
     st_data = st_folium(m, width=1000, height=600)

@@ -33,8 +33,8 @@ def graphPendidikan(kecamatan):
     if kecamatan == "Semua":
         df = pd.DataFrame({
             "Kecamatan": get_kecamatan_data()["nama"].tolist(),
-            "Tidak/putus sekolah, belum tamat SD, tamat SD": get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
-            "SLTP/SLTA": get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
+            "Tidak/putus sekolah & tamat SD": get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
+            "Sekolah Menengah": get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
             "D1/D2, D3, S1, S2, S3": get_kuliah_data(kecamatan)["kuliah"].tolist()
         })
 
@@ -58,14 +58,14 @@ def graphPendidikan(kecamatan):
             text=alt.Text("Jumlah:Q", format=",")
         )
 
-        st.altair_chart(chart + text, use_container_width=True)
+        return st.altair_chart(chart + text, use_container_width=True)
 
     else:
         label = f"Kelurahan di {kecamatan.capitalize()}"
         df = pd.DataFrame({
             label: get_kelurahan_data(kecamatan)["nama"].tolist(),
-            "Tidak/putus sekolah, belum tamat SD, tamat SD": get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
-            "SLTP/SLTA": get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
+            "Tidak/putus sekolah & tamat SD": get_belum_sekolah_data(kecamatan)["Tidak/putus sekolah, belum tamat SD, tamat SD"].tolist(),
+            "Sekolah Menengah ": get_SLTPSLTA_data(kecamatan)["SLTP/SLTA"].tolist(),
             "D1/D2, D3, S1, S2, S3": get_kuliah_data(kecamatan)["kuliah"].tolist()
         })
 
@@ -89,7 +89,7 @@ def graphPendidikan(kecamatan):
             text=alt.Text("Jumlah:Q", format=",")
         )
 
-        st.altair_chart(chart + text, use_container_width=True)
+        return st.altair_chart(chart + text, use_container_width=True)
 
 # def graphPekerjaan(kecamatan):
 #     if kecamatan == "Semua" : 
@@ -117,9 +117,9 @@ def graphPekerjaan(kecamatan):
     if kecamatan == "Semua":
         df = pd.DataFrame({
             "Kecamatan": get_kecamatan_data()["nama"].tolist(),
-            "Tidak/Belum Bekerja, Pelajar/Mahasiswa, IRT, Pensiunan": get_firstCategory_data(kecamatan)["Category 1"].tolist(),
-            "Perdagangan, Wiraswasta, Nelayan": get_secondCategory_data(kecamatan)["Category 2"].tolist(),
-            "Guru, Perawat, Pengacara": get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
+            "Tidak/Belum Bekerja": get_firstCategory_data(kecamatan)["Category 1"].tolist(),
+            "Penghasilan Tidak Stabil": get_secondCategory_data(kecamatan)["Category 2"].tolist(),
+            "Penghasilan Stabil": get_ThirdCategory_data(kecamatan)["Category 3"].tolist()
         })
 
         df_melt = df.melt(id_vars="Kecamatan", var_name="Kategori", value_name="Jumlah")

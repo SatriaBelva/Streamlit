@@ -139,12 +139,12 @@ col3, col4 = st.columns(2)
 with col3:
     with st.container(border=True):
         st.subheader("Jumlah Persebaran Menara BTS")
-        graph_Site_pie()
+        graph_Site()
 
 with col4:
     with st.container(border=True):
         st.subheader("Distribusi Outlet Mitra")
-        graph_OUTLETPJP_pie()
+        graph_OUTLETPJP()
 
 with st.container(border=True):
     st.title("FB Share Reg & Youth per Kecamatan")

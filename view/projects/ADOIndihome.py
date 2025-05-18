@@ -91,11 +91,11 @@ with col1 :
     with st.container(border=True):
         st.subheader("Jumlah Persebaran WIFI")
         # graph_WifiShare()
-        graph_WifiShare_pie()
+        graph_WifiShare()
 with col2 :
     with st.container(border=True):
         st.subheader("Jumlah Titik ODP")
         # graph_ODP()
-        graph_ODP_pie()
+        graph_ODP()
 
 tableADOIH()

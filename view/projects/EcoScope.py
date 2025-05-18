@@ -109,8 +109,8 @@ with colText :
         default_queryeco = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"      
         user_queryeco = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        qaeco = get_chatbot("eco")
-        
+        qaeco = load_chatbot_eco()
+
         if user_queryeco and user_queryeco.strip() != "":
             with st.spinner("Sedang mencari jawaban..."):
                 resulteco = get_chatbot_response_eco(qaeco, user_queryeco)
@@ -121,7 +121,7 @@ with colText :
         elif user_queryeco is None:
             with st.spinner("Sedang mencari jawaban..."):
                 resulteco = get_chatbot_response_eco(qaeco, default_queryeco)
-                st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
+                st.markdown("### Strategi untuk Wilayah Ini:")
                 st.markdown(resulteco["result"])
 
 with st.container(border=True):

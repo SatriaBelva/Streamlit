@@ -114,26 +114,26 @@ with colText :
         st.caption("Rekomendasi")
 
         # Pertanyaan otomatis
-        default_query = f"Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan dan pekerjaan yang ada disitu, dan berikan alasannya"
+        default_query =  f"""Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan, dan kategori pekerjaan yang ada di situ. dan berikan alasannya"""
 
         # Input pertanyaan manual dari user (di bawah)
         # st.markdown("### Ajukan pertanyaan lain:")
         user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        qa = get_chatbot("popu")
+        # qa = load_chatbot_popu()
         
-        if user_query and user_query.strip() != "":
-            with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_popu(qa, user_query)
-                st.markdown("### Jawaban dari pertanyaan Anda:")
-                st.markdown(result["result"])
+        # if user_query and user_query.strip() != "":
+        #     with st.spinner("Sedang mencari jawaban..."):
+        #         result = get_chatbot_response_popu(qa, user_query)
+        #         st.markdown("### Jawaban dari pertanyaan Anda:")
+        #         st.markdown(result["result"])
 
-        # Jika user tidak mengisi apapun, tampilkan default query
-        elif user_query is None:
-            with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_popu(qa, default_query)
-                st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
-                st.markdown(result["result"])
+        # # Jika user tidak mengisi apapun, tampilkan default query
+        # elif user_query is None:
+        #     with st.spinner("Sedang mencari jawaban..."):
+        #         result = get_chatbot_response_popu(qa, default_query)
+        #         st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
+        #         st.markdown(result["result"])
                 
 with st.container(border=True):            
     st.title("Pendidikan")

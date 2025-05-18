@@ -114,65 +114,7 @@ def graph_PortAvail_TotalPort():
     st.altair_chart(chart + text, use_container_width=True)
 
 
-# def graph_WifiShare():
-#     dataPendidikan = pd.DataFrame(
-#         {
-#             "Kabupaten"     : get_Kabupaten_data(),
-#             "Wifi Share"    : get_WifiShare_data(),
-#         }
-#     )
-#     # Bersihkan dan ubah koma jadi titik, lalu ubah ke float
-#     dataPendidikan["Wifi Share"] = (dataPendidikan["Wifi Share"].astype(str).str.replace(",", ".", regex=False).astype(float))
-
-#     df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars="Wifi Share", var_name="Kategori", value_name="Jumlah")
-
-#     chart = alt.Chart(df_melted).mark_bar().encode(
-#         x=alt.X("Kabupaten:N", sort=None),
-#         y=alt.Y("Jumlah:Q"),
-#         # xOffset="Kategori:N",  # Ini penting untuk grouped bar
-#         color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#F5868D"]), legend=alt.Legend(orient="bottom")),  # 👈 legend di bawah),
-#         tooltip=[
-#             alt.Tooltip("Kabupaten:N"),
-#             alt.Tooltip("Kategori:N"),
-#             alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
-#         ]
-#     ).properties(height=550)
-
-#     return st.altair_chart(chart, use_container_width=True)
-
-# def graph_ODP():
-#     dataPendidikan = pd.DataFrame(
-#         {
-#             "Kabupaten" : get_Kabupaten_data(),
-#             "ODP"       : get_ODP_data(),
-#         }
-#     )
-    
-#     dataPendidikan["ODP"] = (
-#         dataPendidikan["ODP"]
-#         .astype(str)
-#         .str.replace(",", ".", regex=False)  # ubah koma ke titik
-#         .astype(float)
-#     )
-
-#     df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars="ODP", var_name="Kategori", value_name="Jumlah")
-
-#     chart = alt.Chart(df_melted).mark_bar().encode(
-#         x=alt.X("Kabupaten:N", sort=None),
-#         y=alt.Y("Jumlah:Q"),
-#         # xOffset="Kategori:N",  # Ini penting untuk grouped bar
-#         color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#F5868D"]), legend=alt.Legend(orient="bottom")),  # 👈 legend di bawah),
-#         tooltip=[
-#             alt.Tooltip("Kabupaten:N"),
-#             alt.Tooltip("Kategori:N"),
-#             alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
-#         ]
-#     ).properties(height=550)
-
-#     return st.altair_chart(chart, use_container_width=True)
-
-
-def graph_WifiShare_pie():
+def graph_WifiShare():
     dataPendidikan = pd.DataFrame(
         {
             "Kabupaten"     : get_Kabupaten_data(),
@@ -182,14 +124,85 @@ def graph_WifiShare_pie():
     # Bersihkan dan ubah koma jadi titik, lalu ubah ke float
     dataPendidikan["Wifi Share"] = (dataPendidikan["Wifi Share"].astype(str).str.replace(",", ".", regex=False).astype(float))
 
-    fig = px.pie(
-        dataPendidikan,
-        values="Wifi Share",
-        names="Kabupaten",
-        color_discrete_sequence=px.colors.sequential.RdBu
+    df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars="Wifi Share", var_name="Kategori", value_name="Jumlah")
+
+    chart = alt.Chart(df_melted).mark_bar().encode(
+        x=alt.X("Kabupaten:N", sort=None),
+        y=alt.Y("Jumlah:Q"),
+        # xOffset="Kategori:N",  # Ini penting untuk grouped bar
+        color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#F5868D"]), legend=alt.Legend(orient="top")),  # 👈 legend di bawah),
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("Kategori:N"),
+            alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
+        ]
+    ).properties(height=550)
+    text = alt.Chart(df_melted).mark_text(
+        align="center", baseline="bottom", dy=-5
+    ).encode(
+        x=alt.X("Kabupaten:N"),
+        y="Jumlah:Q",
+        text=alt.Text("Jumlah:Q", format=",")  # format angka ribuan
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    return st.altair_chart(chart + text, use_container_width=True)
+
+def graph_ODP():
+    dataPendidikan = pd.DataFrame(
+        {
+            "Kabupaten" : get_Kabupaten_data(),
+            "ODP"       : get_ODP_data(),
+        }
+    )
+    
+    dataPendidikan["ODP"] = (
+        dataPendidikan["ODP"]
+        .astype(str)
+        .str.replace(",", ".", regex=False)  # ubah koma ke titik
+        .astype(float)
+    )
+
+    df_melted = dataPendidikan.melt(id_vars="Kabupaten", value_vars="ODP", var_name="Kategori", value_name="Jumlah")
+
+    chart = alt.Chart(df_melted).mark_bar().encode(
+        x=alt.X("Kabupaten:N", sort=None),
+        y=alt.Y("Jumlah:Q"),
+        # xOffset="Kategori:N",  # Ini penting untuk grouped bar
+        color=alt.Color("Kategori:N", scale=alt.Scale(range=["#E30511","#F5868D"]), legend=alt.Legend(orient="top")),  # 👈 legend di bawah),
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("Kategori:N"),
+            alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
+        ]
+    ).properties(height=550)
+    text = alt.Chart(df_melted).mark_text(
+        align="center", baseline="bottom", dy=-5
+    ).encode(
+        x=alt.X("Kabupaten:N"),
+        y="Jumlah:Q",
+        text=alt.Text("Jumlah:Q", format=",")  # format angka ribuan
+    )
+
+    return st.altair_chart(chart + text, use_container_width=True)
+
+# def graph_WifiShare_pie():
+#     dataPendidikan = pd.DataFrame(
+#         {
+#             "Kabupaten"     : get_Kabupaten_data(),
+#             "Wifi Share"    : get_WifiShare_data(),
+#         }
+#     )
+#     # Bersihkan dan ubah koma jadi titik, lalu ubah ke float
+#     dataPendidikan["Wifi Share"] = (dataPendidikan["Wifi Share"].astype(str).str.replace(",", ".", regex=False).astype(float))
+
+#     fig = px.pie(
+#         dataPendidikan,
+#         values="Wifi Share",
+#         names="Kabupaten",
+#         color_discrete_sequence=px.colors.sequential.RdBu
+#     )
+
+#     st.plotly_chart(fig, use_container_width=True)
 
 def graph_ODP_pie():
     dataPendidikan = pd.DataFrame(
