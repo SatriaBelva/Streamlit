@@ -13,22 +13,16 @@ import streamlit as st
 def load_chatbot_eco():
     os.environ["OPENAI_API_KEY"] = "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"
 
-    loader = UnstructuredWordDocumentLoader("data/Data Product Telkomsel.docx")
-    documents = loader.load()
-
-    splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=700)
-    chunks = splitter.split_documents(documents)
-
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectorstore = FAISS.from_documents(chunks, embedding=embeddings)
+    vectorstore = FAISS.load_local(r"D:\magang telkom 2\Streamlit\controller\chat\vector_index\popu_index",embeddings,allow_dangerous_deserialization=True)
+
 
     llm = ChatOpenAI(
-        model_name="meta-llama/llama-4-scout:free",
-        # openai_api_key="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",
-        openai_api_base="https://openrouter.ai/api/v1"  
+        model_name="google/gemini-2.0-flash-exp:free",
+        openai_api_base="https://openrouter.ai/api/v1"
     )
 
-    prompt_template = """Anda adalah asisten digital Telkomsel.
+    prompt_template = """Anda adalah asisten digital Telkomsel...
 Jawablah pertanyaan pengguna *hanya* berdasarkan informasi berikut:
 
 {context}
