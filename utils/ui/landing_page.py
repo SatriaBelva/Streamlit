@@ -226,8 +226,8 @@ def landing_page_style() :
     <section class="hero" data-aos="fade-up" data-aos-duration="1000" style="background: url('data:image/png;base64,{peta}') no-repeat center center;">
         <div class="info-box">
           <h1>Market Analytics</h1>
-          <p>Visualisasi data secara komprehensif melalui peta Kabupaten Jember.</p>
-          <p>Dapatkan grafik informatif dan rekomendasi strategis untuk memahami dinamika sosial, ekonomi, dan wilayah secara lebih mendalam.</p>
+          <p>Analisis data Kabupaten Jember untuk mendukung pengembangan bisnis  PT. Telekomunikasi Selular Jember  melalui visualisasi data interaktif dalam bentuk peta, grafik, serta rekomendasi  layanan product dan strategi pemasaran di setiap wilayah Kabupaten Jember.</p>
+
         </div>
     </section>
     <div class="feature" data-aos="fade-up" data-aos-duration="1000">
@@ -237,12 +237,12 @@ def landing_page_style() :
             <div class="card">
                 <img src="data:image/png;base64,{Populytics}" class="icon">
                 <h3>Populytics</h3>
-                <p>Analisis IPM wilayah untuk strategi yang lebih terarah</p>
+                <p>Analisis IPM wilayah untuk strategi produk yang sesuai dengan kebutuhan wilayah</p>
             </div>
             <div class="card">
                 <img src="data:image/png;base64,{EcoScope}" class="icon">
                 <h3>EcoScope</h3>
-                <p>Pemetaan tingkat ekonomi untuk keputusan inklusif</p>
+                <p>Analisis tingkat ekonomi untuk menunjang strategi pemasaran yang efektif</p>
             </div>
             <div class="card">
                 <img src="data:image/png;base64,{ADOIH}" class="icon">
@@ -261,7 +261,7 @@ def landing_page_style() :
         AOS.init();
     </script>
     '''
-    return components.html(tes, scrolling=True, height=1600)
+    return components.html(tes, scrolling=False, height=2500)
 
 
 def hide_sidebar():

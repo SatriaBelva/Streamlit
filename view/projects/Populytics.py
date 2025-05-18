@@ -120,7 +120,7 @@ with colText :
         # st.markdown("### Ajukan pertanyaan lain:")
         user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        qa = load_chatbot_popu()
+        qa = get_chatbot("popu")
         
         if user_query and user_query.strip() != "":
             with st.spinner("Sedang mencari jawaban..."):

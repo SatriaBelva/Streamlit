@@ -106,23 +106,23 @@ with colText :
         st.header(f"Kec. {selected_kecamatan}")
         st.caption("Rekomendasi")
         
-        default_query = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"      
-        user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
+        default_queryeco = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"      
+        user_queryeco = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        qa = load_chatbot_eco()
+        qaeco = get_chatbot("eco")
         
-        if user_query and user_query.strip() != "":
+        if user_queryeco and user_queryeco.strip() != "":
             with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_eco(qa, user_query)
+                resulteco = get_chatbot_response_eco(qaeco, user_queryeco)
                 st.markdown("### Jawaban dari pertanyaan Anda:")
-                st.markdown(result["result"])
+                st.markdown(resulteco["result"])
 
         # Jika user tidak mengisi apapun, tampilkan default query
-        elif user_query is None:
+        elif user_queryeco is None:
             with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_eco(qa, default_query)
+                resulteco = get_chatbot_response_eco(qaeco, default_queryeco)
                 st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
-                st.markdown(result["result"])
+                st.markdown(resulteco["result"])
 
 with st.container(border=True):
     st.title("Indeks Ekonomi")
