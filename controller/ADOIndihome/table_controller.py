@@ -39,13 +39,32 @@ def tableADOIH() :
             "text-align": "center"
         },
         ".ag-row-even": {
-            "background-color": "#f5f5f5"
+            "background-color": "#EBEAE8"
         },
         ".ag-row-odd": {
             "background-color": "white"
+        },
+        ".ag-row:last-child": {
+            "background-color": "#E40000",
+            "color": "white",
+            "font-weight": "bold"
         }
-    }
+}
+    numerik_kolom = [
+        'Total Household', 'LIS Aktif', 'Total ODP', 'PORT Available',
+        'Total PORT'
+    ]
 
+    for kolom in numerik_kolom:
+        data[kolom] = pd.to_numeric(data[kolom], errors='coerce')
+    total_row = {
+        'Kabupaten': 'Total'
+    }
+    for kolom in numerik_kolom:
+        total_row[kolom] = data[kolom].sum()
+
+    # Tambahkan baris total
+    data = pd.concat([data, pd.DataFrame([total_row])], ignore_index=True)
     AgGrid(
         data,
         custom_css=custom_css,

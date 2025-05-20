@@ -21,8 +21,55 @@ def tablePopultycs(kecamatan) :
                 'Jumlah KK'                      : get_jumlahKK_data(kecamatan)["Jumlah Kartu Keluarga"].tolist(),
             }
         )
+        gb = GridOptionsBuilder.from_dataframe(data)
+            # Define column groups
+        gb.configure_column("Sekolah Tinggi", header_name="Sekolah Tinggi")
+        gb.configure_column("Sekolah Menengah", header_name="Sekolah Menengah")
+        gb.configure_column("Tidak/Belum Sekolah & Tamat SD", header_name="Tidak/Belum Sekolah & Tamat SD")
+        gb.configure_column("Tidak/Belum Bekerja", header_name="Tidak/Belum Bekerja")
+        gb.configure_column("Penghasilan Stabil", header_name="Penghasilan Stabil")
+        gb.configure_column("Penghasilan Tidak Stabil", header_name="Penghasilan Tidak Stabil")
+
+        grid_options = gb.build()
+
+        grid_options["columnDefs"] = [
+            {"headerName": "Kecamatan", "field": "Kecamatan"},
+            {
+                "headerName": "Pendidikan",
+                "headerClass": "red-header",
+                "children": [
+                    {"headerName": "Sekolah Tinggi", "field": "Sekolah Tinggi"},
+                    {"headerName": "Sekolah Menengah", "field": "Sekolah Menengah"},
+                    {"headerName": "Tidak/Belum Sekolah & Tamat SD", "field": "Tidak/Belum Sekolah & Tamat SD"},
+                ]
+            },
+            {
+                "headerName": "Pekerjaan",
+                "headerClass": "red-header",
+                "children": [
+                    {"headerName": "Tidak/Belum Bekerja", "field": "Tidak/Belum Bekerja"},
+                    {"headerName": "Penghasilan Stabil", "field": "Penghasilan Stabil"},
+                    {"headerName": "Penghasilan Tidak Stabil", "field": "Penghasilan Tidak Stabil"},
+                ]
+            },
+            {"headerName": "Jumlah Penduduk", "field": "Jumlah Penduduk"},
+            {"headerName": "Jumlah KK", "field": "Jumlah KK"},
+        ]
         # Custom CSS styles
         custom_css = {
+            ".ag-header-group-cell": {
+                "background-color": "#D70000",
+                "color": "white",
+                "font-weight": "bold",
+                "align-items": "center",
+                "justify-content": "center",
+                "text-align": "center"
+            },
+            ".ag-header-cell-comp-wrapper": {
+                "align-items": "center",
+                "justify-content": "center",
+                "text-align": "center"
+            },
             ".ag-header-cell-label": {
                 "justify-content": "center",
                 "display": "flex",
@@ -40,15 +87,36 @@ def tablePopultycs(kecamatan) :
                 "text-align": "center"
             },
             ".ag-row-even": {
-                "background-color": "#f5f5f5"
+                "background-color": "#EBEAE8"
             },
             ".ag-row-odd": {
                 "background-color": "white"
+            },
+            ".ag-row:last-child": {
+                "background-color": "#E40000",
+                "color": "white",
+                "font-weight": "bold"
             }
         }
+        numerik_kolom = [
+            'Sekolah Tinggi', 'Sekolah Menengah', 'Tidak/Belum Sekolah & Tamat SD',
+            'Tidak/Belum Bekerja', 'Penghasilan Stabil', 'Penghasilan Tidak Stabil',
+            'Jumlah Penduduk', 'Jumlah KK'
+        ]
 
+        for kolom in numerik_kolom:
+            data[kolom] = pd.to_numeric(data[kolom], errors='coerce')
+        total_row = {
+            'Kecamatan': 'Total'
+        }
+        for kolom in numerik_kolom:
+            total_row[kolom] = data[kolom].sum()
+
+        # Tambahkan baris total
+        data = pd.concat([data, pd.DataFrame([total_row])], ignore_index=True)
         AgGrid(
             data,
+            gridOptions=grid_options,
             custom_css=custom_css,
             use_container_width=True,
             theme="alpine",
@@ -72,8 +140,55 @@ def tablePopultycs(kecamatan) :
                 'Jumlah KK'                                 : get_jumlahKK_data(kecamatan)["Jumlah Kartu Keluarga"].tolist(),
             }
         )
+        gb = GridOptionsBuilder.from_dataframe(data)
+            # Define column groups
+        gb.configure_column("Sekolah Tinggi", header_name="Sekolah Tinggi")
+        gb.configure_column("Sekolah Menengah", header_name="Sekolah Menengah")
+        gb.configure_column("Tidak/Belum Sekolah & Tamat SD", header_name="Tidak/Belum Sekolah & Tamat SD")
+        gb.configure_column("Tidak/Belum Bekerja", header_name="Tidak/Belum Bekerja")
+        gb.configure_column("Penghasilan Stabil", header_name="Penghasilan Stabil")
+        gb.configure_column("Penghasilan Tidak Stabil", header_name="Penghasilan Tidak Stabil")
+
+        grid_options = gb.build()
+
+        grid_options["columnDefs"] = [
+            {"headerName": "Kelurahan", "field": f"Kelurahan di {kecamatan.capitalize()}"},
+            {
+                "headerName": "Pendidikan",
+                "headerClass": "red-header",
+                "children": [
+                    {"headerName": "Sekolah Tinggi", "field": "Sekolah Tinggi"},
+                    {"headerName": "Sekolah Menengah", "field": "Sekolah Menengah"},
+                    {"headerName": "Tidak/Belum Sekolah & Tamat SD", "field": "Tidak/Belum Sekolah & Tamat SD"},
+                ]
+            },
+            {
+                "headerName": "Pekerjaan",
+                "headerClass": "red-header",
+                "children": [
+                    {"headerName": "Tidak/Belum Bekerja", "field": "Tidak/Belum Bekerja"},
+                    {"headerName": "Penghasilan Stabil", "field": "Penghasilan Stabil"},
+                    {"headerName": "Penghasilan Tidak Stabil", "field": "Penghasilan Tidak Stabil"},
+                ]
+            },
+            {"headerName": "Jumlah Penduduk", "field": "Jumlah Penduduk"},
+            {"headerName": "Jumlah KK", "field": "Jumlah KK"},
+        ]
         # Custom CSS styles
         custom_css = {
+            ".ag-header-group-cell": {
+                "background-color": "#D70000",
+                "color": "white",
+                "font-weight": "bold",
+                "align-items": "center",
+                "justify-content": "center",
+                "text-align": "center"
+            },
+            ".ag-header-cell-comp-wrapper": {
+                "align-items": "center",
+                "justify-content": "center",
+                "text-align": "center"
+            },
             ".ag-header-cell-label": {
                 "justify-content": "center",
                 "display": "flex",
@@ -91,14 +206,36 @@ def tablePopultycs(kecamatan) :
                 "text-align": "center"
             },
             ".ag-row-even": {
-                "background-color": "#f5f5f5"
+                "background-color": "#EBEAE8"
             },
             ".ag-row-odd": {
                 "background-color": "white"
+            },
+            ".ag-row:last-child": {
+                "background-color": "#E40000",
+                "color": "white",
+                "font-weight": "bold"
             }
         }
+        numerik_kolom = [
+            'Sekolah Tinggi', 'Sekolah Menengah', 'Tidak/Belum Sekolah & Tamat SD',
+            'Tidak/Belum Bekerja', 'Penghasilan Stabil', 'Penghasilan Tidak Stabil',
+            'Jumlah Penduduk', 'Jumlah KK'
+        ]
+
+        for kolom in numerik_kolom:
+            data[kolom] = pd.to_numeric(data[kolom], errors='coerce')
+        total_row = {
+            f"Kelurahan di {kecamatan.capitalize()}": 'Total'
+        }
+        for kolom in numerik_kolom:
+            total_row[kolom] = data[kolom].sum()
+
+        # Tambahkan baris total
+        data = pd.concat([data, pd.DataFrame([total_row])], ignore_index=True)
         AgGrid(
             data,
+            gridOptions=grid_options,
             custom_css=custom_css,
             use_container_width=True,
             theme="alpine",

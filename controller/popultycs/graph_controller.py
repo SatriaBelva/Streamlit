@@ -54,6 +54,7 @@ def graphPendidikan(kecamatan):
             color="black"
         ).encode(
             x=alt.X("Kecamatan:N", sort=None),
+            tooltip=["Kecamatan:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")],
             y=alt.Y("Jumlah:Q", stack="zero"),
             text=alt.Text("Jumlah:Q", format=",")
         )
@@ -85,6 +86,7 @@ def graphPendidikan(kecamatan):
             color="black"
         ).encode(
             x=alt.X(f"{label}:N", sort=None),
+            tooltip=[f"{label}:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")],
             y=alt.Y("Jumlah:Q", stack="zero"),
             text=alt.Text("Jumlah:Q", format=",")
         )
@@ -138,6 +140,7 @@ def graphPekerjaan(kecamatan):
             color="black"
         ).encode(
             x=alt.X("Kecamatan:N", sort=None),
+            tooltip=["Kecamatan:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")],
             y=alt.Y("Jumlah:Q", stack="zero"),
             text=alt.Text("Jumlah:Q", format=",")
         )
@@ -174,6 +177,7 @@ def graphPekerjaan(kecamatan):
             color="black"
         ).encode(
             x=alt.X(f"{label}:N", sort=None),
+            tooltip=[f"{label}:N", "Kategori:N", alt.Tooltip("Jumlah:Q", format=",")],
             y=alt.Y("Jumlah:Q", stack="zero"),
             text=alt.Text("Jumlah:Q", format=","),
             detail="Kategori:N"

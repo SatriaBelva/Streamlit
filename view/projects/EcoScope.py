@@ -74,7 +74,7 @@ st.markdown(f"""
         <img src="data:image/png;base64,{img_base64}" alt="Header Image"/>
         <div class="header-text-container">
             <div class="custom-header-title">EcoScope Kabupaten Jember</div>
-            <div class="custom-header-subtitle">Data ini menunjukkan tingkat ekonomi di Kabupaten Jember, dihitung dari Indeks Ekonomi tiap kecamatan yang didapat dengan mengalikan jumlah pekerja dengan bobot jenis pekerjaannya, membaginya dengan total penduduk, lalu dinormalisasi ke skala 0–100.<br>Jember</div>
+            <div class="custom-header-subtitle">Data ini menunjukkan tingkat ekonomi di Kabupaten Jember, dihitung dari Indeks Ekonomi tiap kecamatan yang didapat dengan mengalikan jumlah pekerja dengan bobot jenis pekerjaannya, membaginya dengan total penduduk, lalu dinormalisasi ke skala 0–100.</div>
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -106,7 +106,7 @@ with colText :
         st.header(f"Kec. {selected_kecamatan}")
         st.caption("Rekomendasi")
         
-        default_queryeco = f"Bagaimana strategi pemasaran yang cocok untuk diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan tingkat ekonomi dan dengan pendapatan masyarakat yang ada disitu, dan berikan alasannya"      
+        default_queryeco = f"Berikan tiga strategi pemasaran yang cocok diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan nilai IPM dan tingkat pendapatan masyarakat, dengan membedakan antara masyarakat yang tidak bekerja, masyarakat dengan pendapatan tidak stabil, dan masyarakat dengan pendapatan stabil. Berikan alasannya untuk masing-masing strategi"      
         user_queryeco = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
         qaeco = load_chatbot_eco()

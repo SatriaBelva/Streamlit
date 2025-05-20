@@ -71,7 +71,7 @@ st.markdown(f"""
         <img src="data:image/png;base64,{img_base64}" alt="Header Image"/>
         <div class="header-text-container">
             <div class="custom-header-title">ADO IndiHome</div>
-            <div class="custom-header-subtitle">Data pada fitur ini merupakan data IPM Kabupaten<br>Jember</div>
+            <div class="custom-header-subtitle">Analisis infrastruktur IndiHome untuk perluasan jaringan yang tepat sasaran<br>Jember</div>
         </div>
     </div>
 """, unsafe_allow_html=True)

@@ -114,7 +114,10 @@ with colText :
         st.caption("Rekomendasi")
 
         # Pertanyaan otomatis
-        default_query =  f"""Berikan beberapa rekomendasi pilihan paket internet {selected_Product} beserta harga dan benefitnya di kecamatan {selected_kecamatan} desa {selected_desa} berdasarkan jumlah penduduk, pendidikan, dan kategori pekerjaan yang ada di situ. dan berikan alasannya"""
+        default_query =  f"""Berdasarkan data Kecamatan {selected_kecamatan}, Desa {selected_desa} termasuk kelompok usia dominan, 
+        tingkat pendidikan, komposisi pekerjaan, kebiasaan penggunaan internet, dan tingkat ekonomi, berikan rekomedasi paket internet 
+        {selected_Product} yang dipilih berdasarkan usia dominan dan kebiasaan mereka, dengan harga dan benefit menyesuaikan dengan 
+        kategori ekonomi (rendah, menengah, tinggi) namun tetap menawarkan opsi terjangkau meski untuk ekonomi tinggi, disertai dengan alasan"""
 
         # Input pertanyaan manual dari user (di bawah)
         # st.markdown("### Ajukan pertanyaan lain:")

@@ -16,5 +16,6 @@ from .ADOMobile.table_controller import *
 from .ADOIndihome.graph_controller import *
 from .ADOIndihome.table_controller import *
 
-
-
+from .MarketCompetition.table_controller import *
+from .MarketCompetition.MarketCompetition_map1_controller import *
+from .MarketCompetition.MarketCompetition_map2_controller import *

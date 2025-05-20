@@ -23,13 +23,13 @@ import altair as alt
 #         )
 #         st.bar_chart(dataPendidikan, x="Kecamatan", y="Indeks Ekonomi", horizontal=False, stack=True, color="#E30511", height=550)
 
-def get_color(value):
-    if value < 30:
-        return '#E30511'
-    elif 30 <= value < 60:
-        return '#FD9B2A'
+def get_color_label(value):
+    if value <= 40:
+        return 'Rendah'
+    elif 41 <= value < 70:
+        return 'Sedang'
     else:
-        return '#229122'
+        return 'Tinggi'
 
 def graphIndeksEkonomi(kecamatan):
     if kecamatan == "Semua":
@@ -43,17 +43,23 @@ def graphIndeksEkonomi(kecamatan):
             "Indeks Ekonomi": get_indeks_ekonomi(kecamatan)["Indeks Ekonomi"].tolist(),
         })
 
-    df["Warna"] = df["Indeks Ekonomi"].apply(get_color)
+    # Tambahkan label kategori dan warna
+    df["Kategori"] = df["Indeks Ekonomi"].apply(get_color_label)
+    warna_dict = {
+        "Rendah": "#E30511", "Sedang": "#FD9B2A", "Tinggi": "#229122"
+    }
 
-    # Bar chart
+    # Bar chart dengan warna dan legend
     bar = alt.Chart(df).mark_bar().encode(
         x=alt.X('Kecamatan:N', sort=None),
         y=alt.Y('Indeks Ekonomi:Q'),
-        color=alt.Color('Warna:N', scale=None, legend=None),
-        tooltip=['Kecamatan', 'Indeks Ekonomi']
+        color=alt.Color('Kategori:N',
+                        scale=alt.Scale(domain=list(warna_dict.keys()), range=list(warna_dict.values())),
+                        legend=alt.Legend(orient="top")),
+        tooltip=['Kecamatan', 'Indeks Ekonomi', 'Kategori']
     ).properties(height=550, width=900)
 
-    # Text label di atas bar
+    # Text label
     text = alt.Chart(df).mark_text(
         align='center',
         baseline='bottom',
@@ -61,7 +67,8 @@ def graphIndeksEkonomi(kecamatan):
     ).encode(
         x=alt.X('Kecamatan:N'),
         y=alt.Y('Indeks Ekonomi:Q'),
-        text=alt.Text('Indeks Ekonomi:Q', format=".1f")  # satu angka di belakang koma
+        tooltip=['Kecamatan', 'Indeks Ekonomi', 'Kategori'],
+        text=alt.Text('Indeks Ekonomi:Q', format=".1f")
     )
 
     st.altair_chart(bar + text, use_container_width=True)

@@ -130,24 +130,29 @@ def mapEcoscope(kecamatan):
         ).add_to(m)
     
     legend_image_html = """
-    <div style="
+     <div style="
         position: fixed;
         top: 10px;
         right: 10px;
         z-index: 9999;
-        background-color: white;
         padding: 10px 14px;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: row;
+        gap: 14px;
         border: 1px solid #ccc;
         border-radius: 8px;
-        font-size: 14px;
-        font-family: Arial, sans-serif;
-        box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+        background: white;
+    ">
 
-        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+        <div style="display: flex; align-items: center;">
             <span style="height: 12px; width: 12px; background-color: green; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
             Tinggi
         </div>
-        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+        <div style="display: flex; align-items: center;">
             <span style="height: 12px; width: 12px; background-color: orange; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
             Sedang
         </div>

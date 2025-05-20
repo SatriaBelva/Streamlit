@@ -94,7 +94,7 @@ def render_unauthorized_page():
 
 # Komponen greeting dan tombol logout
 def render_sidebar_greeting(user):
-    st.sidebar.success(f"Hai, {user.name} 👋")
+    # st.sidebar.success(f"Hai, {user.name} 👋")
     if st.sidebar.button("Logout"):
         st.session_state.pop("manual_user", None)
         cookies["is_logged_in"] = "false"

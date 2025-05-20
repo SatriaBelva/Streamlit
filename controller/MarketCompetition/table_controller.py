@@ -5,17 +5,10 @@ from controller import *
 from model import *
 from st_aggrid import AgGrid,  GridOptionsBuilder
 
-def tableMobile() :
+def tableMarket() :
     data = pd.DataFrame(
         {   
             'Kabupaten'         : get_Kabupaten_data(),
-            'Populasi'          : get_Populasi_data(),
-            'ARPU'              : get_ARPU_data(),
-            'CB'                : get_CB_data(),
-            'Penetrasi CB'      : get_PenetrasiCB_data(),
-            'Outlet PJP'        : get_OutletPJP_data(),
-            'Site'              : get_Site_data(),
-            'Coverage Share'    : get_CoverageShare_data(),
             'FB Share REG'      : get_FacebookShare_data(),
             'Status REG'        : get_StatugReg_data(),
             'Close COMP REG'    : get_CloseCompetitionReg_data(),
@@ -28,24 +21,20 @@ def tableMobile() :
     
     gb = GridOptionsBuilder.from_dataframe(data)
     # Define column groups
+    gb.configure_column("Kabupaten", header_name="Kabupaten")
     gb.configure_column("FB Share REG", header_name="FB Share REG")
     gb.configure_column("Status REG", header_name="Status REG")
     gb.configure_column("Close COMP REG", header_name="Close COMP REG")
     gb.configure_column("FB Share Youth", header_name="FB Share Youth")
     gb.configure_column("Status Youth", header_name="Status Youth")
     gb.configure_column("Close COMP Youth", header_name="Close COMP Youth")
-
+    gb.configure_grid_options(domLayout='autoHeight')
+    gb.configure_default_column(resizable=True, minWidth=100, flex=2)
+    gb.configure_default_column(flex=2)
+    
     grid_options = gb.build()
-
     grid_options["columnDefs"] = [
         {"headerName": "Kabupaten", "field": "Kabupaten"},
-        {"headerName": "Populasi", "field": "Populasi"},
-        {"headerName": "ARPU", "field": "ARPU"},
-        {"headerName": "CB", "field": "CB"},
-        {"headerName": "Penetrasi CB", "field": "Penetrasi CB"},
-        {"headerName": "Outlet PJP", "field": "Outlet PJP"},
-        {"headerName": "Site", "field": "Site"},
-        {"headerName": "Coverage Share", "field": "Coverage Share"},
         {
             "headerName": "Regional",
             "headerClass": "red-header",
@@ -102,45 +91,9 @@ def tableMobile() :
         },
         ".ag-row-odd": {
             "background-color": "white"
-        },
-        ".ag-row:last-child": {
-            "background-color": "#E40000",
-            "color": "white",
-            "font-weight": "bold"
         }
     }
-    numerik_kolom = [
-        'Populasi', 'ARPU', 'CB',
-        'Outlet PJP', 'Site',
-        'FB Share REG',
-        'FB Share Youth'
-    ]
-    kolom_desimal_koma = ['FB Share REG', 'FB Share Youth']
 
-    for kolom in numerik_kolom:
-        data[kolom] = data[kolom].astype(str).str.strip()
-
-        if kolom not in kolom_desimal_koma:
-            # Hapus titik ribuan
-            data[kolom] = data[kolom].str.replace('.', '', regex=False)
-            # Ubah koma ke titik (untuk desimal jika ada)
-            data[kolom] = data[kolom].str.replace(',', '.', regex=False)
-        else:
-            # Untuk 'FB Share REG' & 'FB Share Youth': biarkan koma tetap sebagai desimal
-            data[kolom] = data[kolom].str.replace('.', '', regex=False)  # hapus ribuan
-            data[kolom] = data[kolom].str.replace(',', '.', regex=False)
-            # Tapi JANGAN ubah koma ke titik
-
-        data[kolom] = pd.to_numeric(data[kolom], errors='coerce')
-
-    total_row = {
-        'Kabupaten': 'Total'
-    }
-    for kolom in numerik_kolom:
-        total_row[kolom] = data[kolom].sum()
-
-    # Tambahkan baris total
-    data = pd.concat([data, pd.DataFrame([total_row])], ignore_index=True)
     AgGrid(
         data,
         gridOptions=grid_options,
@@ -152,6 +105,7 @@ def tableMobile() :
         reload_data=True,
         hide_index=True,
         autosize_all_columns=True,
+        fit_columns_on_grid_load=True
     )
 
 

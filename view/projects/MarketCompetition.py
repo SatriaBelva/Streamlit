@@ -116,39 +116,22 @@ st.markdown(f"""
     <div class="custom-header-container">
         <img src="data:image/png;base64,{img_base64}" alt="Header Image"/>
         <div class="header-text-container">
-            <div class="custom-header-title">ADO Mobile</div>
-            <div class="custom-header-subtitle">Data pada fitur ini merupakan data IPM Kabupaten<br>Jember</div>
+            <div class="custom-header-title">Market Competition</div>
+            <div class="custom-header-subtitle">Informasi status dominasi layanan seluler di wilayah Tapal Kuda, dengan kategori Win untuk area yang didominasi Telkomsel dan Lose untuk area yang didominasi kompetitor terdekatnya, berdasarkan data dari Meta Facebook.</div>
         </div>
     </div>
 """, unsafe_allow_html=True)
 
-col1, col2 = st.columns(2)
+if 'kecamatan' not in st.session_state:
+    st.session_state['kecamatan'] = "Semua"
+if 'desa' not in st.session_state:
+    st.session_state['desa'] = "Semua"
 
-with col1:
-    with st.container(border=True):
-        st.subheader("Jumlah Pelanggan Aktif")
-        graphCB_Populasi()  # altair_chart masuk ke dalam!
+# map(st.session_state['kecamatan'], st.session_state['desa'])
+st.title("Regional Competition")
+map_REG_status()
+st.title("Youth Competition")
+map_youth_status()
 
-with col2:
-    with st.container(border=True):
-        st.subheader("Distribusi ARPU per Kecamatan")
-        graph_Arpu()
-
-col3, col4 = st.columns(2)
-
-with col3:
-    with st.container(border=True):
-        st.subheader("Jumlah Persebaran Menara BTS")
-        graph_Site()
-
-with col4:
-    with st.container(border=True):
-        st.subheader("Distribusi Outlet Mitra")
-        graph_OUTLETPJP()
-
-with st.container(border=True):
-    st.title("FB Share Reg & Youth per Kecamatan")
-    graph_FBREG_FBYouth()
-
-tableMobile()
-refreshButton()
+tableMarket()
+# refreshButton()

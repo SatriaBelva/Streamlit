@@ -13,5 +13,19 @@ from routes import *
 from middleware import *
 
 if auth_guard() :
+    st.markdown("""
+    <style>
+    [data-testid="stNavSectionHeader"] {
+        font-size: 20px !important;
+        text-align: center;
+        font-weight: bold !important;
+        color: black !important;
+        font-family: 'Poppins', sans-serif !important;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     pg = st.navigation(get_pages())
     pg.run()
+

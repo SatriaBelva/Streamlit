@@ -7,7 +7,6 @@ from model import *
 def tableEcoscope(kecamatan) :
     data = pd.DataFrame(
         {   
-            'Nomor'              : get_kecamatan_data()["nama"].tolist(),
             'Kecamatan'          : get_kecamatan_data()["nama"].tolist(),
             'Jumlah Penduduk'    : get_jumlah_penduduk_data(kecamatan)["Jumlah Penduduk"].tolist(),
             'Indeks Ekonomi'     : get_indeks_ekonomi_table()["Indeks Ekonomi"].tolist(),

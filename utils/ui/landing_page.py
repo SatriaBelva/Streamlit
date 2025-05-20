@@ -219,9 +219,7 @@ def landing_page_style() :
     <div class="landing-page">
         <img class="telkomsel-bg" src="data:image/png;base64,{bg_telkomsel}" alt="">
         <h1>Market Analytics</h1>
-        <a href="">
-            <div>Login</div>
-        </a>
+
     </div>
     <section class="hero" data-aos="fade-up" data-aos-duration="1000" style="background: url('data:image/png;base64,{peta}') no-repeat center center;">
         <div class="info-box">

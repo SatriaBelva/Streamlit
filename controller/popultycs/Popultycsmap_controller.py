@@ -63,7 +63,7 @@ def map(kecamatan, desa):
         colors=density_colormap.colors[::-1],
         index=density_colormap.index,
         vmin=min_density,
-        vmax=max_density
+        vmax=max_density    
     )
 
 
@@ -161,22 +161,25 @@ def map(kecamatan, desa):
                 sticky=False
             )
         ).add_to(m)
-    density_colormap.add_to(m)
+    # density_colormap.add_to(m)
 
     legend_image_html = """
     <div style="
         position: fixed;
-        top: 30px;
+        top: 10px;
         right: 10px;
         z-index: 9999;
         padding: 10px 14px;
         font-size: 14px;
-        font-weight: extra-bold;
+        font-weight: bold;
         font-family: Arial, sans-serif;
         display: flex;
         flex-direction: row;
         gap: 14px;
-        background: none;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+        background: white;
     ">
 
         <div style="display: flex; align-items: center;">

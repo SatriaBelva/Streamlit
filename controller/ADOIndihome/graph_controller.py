@@ -53,11 +53,16 @@ def graph_ListAktif_TotalHousehold():
     ).encode(
         x=alt.X("Kabupaten:N", sort=None),
         y=alt.Y("Jumlah:Q", stack="zero"),
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("Kategori:N"),
+            alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
+        ],
         text=alt.Text("Jumlah:Q", format=","),
         detail="Kategori:N"
     )
 
-    st.altair_chart(chart + text, use_container_width=True)
+    return st.altair_chart(chart + text, use_container_width=True)
 
 
 def graph_PortAvail_TotalPort():
@@ -107,11 +112,16 @@ def graph_PortAvail_TotalPort():
     ).encode(
         x=alt.X("Kabupaten:N", sort=None),
         y=alt.Y("Jumlah:Q", stack="zero"),
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("Kategori:N"),
+            alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
+        ],
         text=alt.Text("Jumlah:Q", format=","),
         detail="Kategori:N"
     )
 
-    st.altair_chart(chart + text, use_container_width=True)
+    return st.altair_chart(chart + text, use_container_width=True)
 
 
 def graph_WifiShare():
@@ -142,6 +152,11 @@ def graph_WifiShare():
     ).encode(
         x=alt.X("Kabupaten:N"),
         y="Jumlah:Q",
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("Kategori:N"),
+            alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
+        ],
         text=alt.Text("Jumlah:Q", format=",")  # format angka ribuan
     )
 
@@ -180,6 +195,11 @@ def graph_ODP():
     ).encode(
         x=alt.X("Kabupaten:N"),
         y="Jumlah:Q",
+        tooltip=[
+            alt.Tooltip("Kabupaten:N"),
+            alt.Tooltip("Kategori:N"),
+            alt.Tooltip("Jumlah:Q", format=",")  # format angka ribuan
+        ],
         text=alt.Text("Jumlah:Q", format=",")  # format angka ribuan
     )
 
@@ -204,25 +224,25 @@ def graph_ODP():
 
 #     st.plotly_chart(fig, use_container_width=True)
 
-def graph_ODP_pie():
-    dataPendidikan = pd.DataFrame(
-        {
-            "Kabupaten" : get_Kabupaten_data(),
-            "ODP"       : get_ODP_data(),
-        }
-    )
+# def graph_ODP_pie():
+#     dataPendidikan = pd.DataFrame(
+#         {
+#             "Kabupaten" : get_Kabupaten_data(),
+#             "ODP"       : get_ODP_data(),
+#         }
+#     )
     
-    dataPendidikan["ODP"] = (
-        dataPendidikan["ODP"]
-        .astype(str)
-        .str.replace(",", ".", regex=False)  # ubah koma ke titik
-        .astype(float)
-    )
-    fig = px.pie(
-        dataPendidikan,
-        values="ODP",
-        names="Kabupaten",
-        color_discrete_sequence=px.colors.sequential.RdBu
-    )
+#     dataPendidikan["ODP"] = (
+#         dataPendidikan["ODP"]
+#         .astype(str)
+#         .str.replace(",", ".", regex=False)  # ubah koma ke titik
+#         .astype(float)
+#     )
+#     fig = px.pie(
+#         dataPendidikan,
+#         values="ODP",
+#         names="Kabupaten",
+#         color_discrete_sequence=px.colors.sequential.RdBu
+#     )
 
-    st.plotly_chart(fig, use_container_width=True)
+#     st.plotly_chart(fig, use_container_width=True)

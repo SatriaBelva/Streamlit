@@ -9,3 +9,6 @@ def gsheet_ADOMobile_connection() :
 
 def gsheet_ADOIH_connection() :
     return st.connection("ADOIH", type=GSheetsConnection)
+
+def gsheet_MarketCompetition_connection() :
+    return st.connection("MarketCompetition", type=GSheetsConnection)
