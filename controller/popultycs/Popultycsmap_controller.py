@@ -7,6 +7,7 @@ import branca.colormap as cm
 from shapely.geometry import Point
 from folium import Element
 
+
 def map_path() :
     # shapefile_path = r"C:\Magang Grapari\Magang\streamlit\data\JemberSHP\ADMINISTRASIDESA_AR_25K.shp"
     shapefile_path = r"data/JemberSHP/ADMINISTRASIDESA_AR_25K.shp"

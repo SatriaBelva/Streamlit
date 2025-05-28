@@ -109,20 +109,41 @@ with colText :
         default_queryeco = f"Berikan tiga strategi pemasaran yang cocok diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan nilai IPM dan tingkat pendapatan masyarakat, dengan membedakan antara masyarakat yang tidak bekerja, masyarakat dengan pendapatan tidak stabil, dan masyarakat dengan pendapatan stabil. Berikan alasannya untuk masing-masing strategi"      
         user_queryeco = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        qaeco = load_chatbot_eco()
-
+        qa = None
+        
         if user_queryeco and user_queryeco.strip() != "":
             with st.spinner("Sedang mencari jawaban..."):
-                resulteco = get_chatbot_response_eco(qaeco, user_queryeco)
+                result = get_chatbot_response_eco(qa, user_queryeco)
                 st.markdown("### Jawaban dari pertanyaan Anda:")
-                st.markdown(resulteco["result"])
+                st.markdown(result, unsafe_allow_html=True)
 
         # Jika user tidak mengisi apapun, tampilkan default query
         elif user_queryeco is None:
             with st.spinner("Sedang mencari jawaban..."):
-                resulteco = get_chatbot_response_eco(qaeco, default_queryeco)
-                st.markdown("### Strategi untuk Wilayah Ini:")
-                st.markdown(resulteco["result"])
+                result = get_chatbot_response_eco(default_queryeco)
+                st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
+                st.markdown(result, unsafe_allow_html=True)
+    # with st.container(border=True, height=600):
+    #     st.header(f"Kec. {selected_kecamatan}")
+    #     st.caption("Rekomendasi")
+        
+    #     default_queryeco = f"Berikan tiga strategi pemasaran yang cocok diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan nilai IPM dan tingkat pendapatan masyarakat, dengan membedakan antara masyarakat yang tidak bekerja, masyarakat dengan pendapatan tidak stabil, dan masyarakat dengan pendapatan stabil. Berikan alasannya untuk masing-masing strategi"      
+    #     user_queryeco = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
+        
+    #     embedder, index, documents = load_chatbot_eco()
+
+    #     if user_queryeco and user_queryeco.strip() != "":
+    #         with st.spinner("Sedang mencari jawaban..."):
+    #             resulteco = get_chatbot_response_eco(embedder, index, documents, user_queryeco)
+    #             st.markdown("### Jawaban dari pertanyaan Anda:")
+    #             st.markdown(resulteco["result"])
+
+    #     # Jika user tidak mengisi apapun, tampilkan default query
+    #     elif user_queryeco is None:
+    #         with st.spinner("Sedang mencari jawaban..."):
+    #             resulteco = get_chatbot_response_eco(embedder, index, documents, default_queryeco)
+    #             st.markdown("### Strategi untuk Wilayah Ini:")
+    #             st.markdown(resulteco["result"])
 
 with st.container(border=True):
     st.title("Indeks Ekonomi")
