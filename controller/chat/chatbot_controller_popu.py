@@ -24,7 +24,7 @@
 
 #     Berdasarkan info berikut:
 
-#     {context}
+#     {context};
 
 #     Perlu diingat, tidak semua penduduk dengan penghasilan tinggi atau yang tinggal di wilayah dengan jumlah penduduk 
 #     besar menginginkan paket internet yang mahal. Seringkali, justru paket internet yang lebih terjangkau lebih sesuai dengan kebutuhan mereka. 
