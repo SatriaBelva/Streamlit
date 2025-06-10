@@ -127,7 +127,7 @@ with colText :
         
         if user_query and user_query.strip() != "":
             with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_popu(qa, user_query)
+                result = get_chatbot_response_popu(user_query)
                 st.markdown("### Jawaban dari pertanyaan Anda:")
                 st.markdown(result, unsafe_allow_html=True)
 

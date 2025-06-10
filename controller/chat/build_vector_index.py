@@ -25,8 +25,8 @@ def build_vector_index(doc_path, save_dir):
     print("✅ Index selesai dibuat dan disimpan.")
 
 if __name__ == "__main__":
-    DOC_PATH = "D:\magang telkom 2\Streamlit\data\Data Product Telkomsel.docx"
-    SAVE_DIR = "vector_index/popu_index"
+    DOC_PATH = "D:\magang telkom 2\Streamlit\controller\chat\data product telkomsel new.docx"
+    SAVE_DIR = "vector_index/chatllm"
     
     os.makedirs(SAVE_DIR, exist_ok=True)
     build_vector_index(DOC_PATH, SAVE_DIR)

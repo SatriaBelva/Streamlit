@@ -113,7 +113,7 @@ with colText :
         
         if user_queryeco and user_queryeco.strip() != "":
             with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_eco(qa, user_queryeco)
+                result = get_chatbot_response_eco(user_queryeco)
                 st.markdown("### Jawaban dari pertanyaan Anda:")
                 st.markdown(result, unsafe_allow_html=True)
 
