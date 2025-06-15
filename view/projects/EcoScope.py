@@ -106,23 +106,23 @@ with colText :
         st.header(f"Kec. {selected_kecamatan}")
         st.caption("Rekomendasi")
         
-        default_queryeco = f"Berikan tiga strategi pemasaran yang cocok diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan nilai IPM dan tingkat pendapatan masyarakat, dengan membedakan antara masyarakat yang tidak bekerja, masyarakat dengan pendapatan tidak stabil, dan masyarakat dengan pendapatan stabil. Berikan alasannya untuk masing-masing strategi"      
-        user_queryeco = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
+        # default_queryeco = f"Berikan tiga strategi pemasaran yang cocok diterapkan di wilayah kecamatan {selected_kecamatan} berdasarkan nilai IPM dan tingkat pendapatan masyarakat, dengan membedakan antara masyarakat yang tidak bekerja, masyarakat dengan pendapatan tidak stabil, dan masyarakat dengan pendapatan stabil. Berikan alasannya untuk masing-masing strategi"      
+        # user_queryeco = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        qa = None
+        # qa = None
         
-        if user_queryeco and user_queryeco.strip() != "":
-            with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_eco(user_queryeco)
-                st.markdown("### Jawaban dari pertanyaan Anda:")
-                st.markdown(result, unsafe_allow_html=True)
+        # if user_queryeco and user_queryeco.strip() != "":
+        #     with st.spinner("Sedang mencari jawaban..."):
+        #         result = get_chatbot_response_eco(user_queryeco)
+        #         st.markdown("### Jawaban dari pertanyaan Anda:")
+        #         st.markdown(result, unsafe_allow_html=True)
 
-        # Jika user tidak mengisi apapun, tampilkan default query
-        elif user_queryeco is None:
-            with st.spinner("Sedang mencari jawaban..."):
-                result = get_chatbot_response_eco(default_queryeco)
-                st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
-                st.markdown(result, unsafe_allow_html=True)
+        # # Jika user tidak mengisi apapun, tampilkan default query
+        # elif user_queryeco is None:
+        #     with st.spinner("Sedang mencari jawaban..."):
+        #         result = get_chatbot_response_eco(default_queryeco)
+        #         st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
+        #         st.markdown(result, unsafe_allow_html=True)
     # with st.container(border=True, height=600):
     #     st.header(f"Kec. {selected_kecamatan}")
     #     st.caption("Rekomendasi")
