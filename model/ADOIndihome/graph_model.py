@@ -84,5 +84,18 @@ def get_CloseComp_data():
         st.exception(e)
         return None
 
+def get_PENETRATION_RATE(): 
+    try:
+        return df['PENETRATION RATE'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
 
-    
+def get_PORT_SHARE(): 
+    try:
+        return df['PORT SHARE'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None

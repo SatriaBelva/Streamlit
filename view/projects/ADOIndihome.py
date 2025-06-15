@@ -99,3 +99,5 @@ with col2 :
         graph_ODP()
 
 tableADOIH()
+
+display_strategy_ui()

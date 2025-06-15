@@ -11,6 +11,7 @@ from .ADOMobile.graph_model import *
 from .ADOMobile.table_model import* 
 
 from .ADOIndihome.graph_model import *
+from .ADOIndihome.kondisi_model import *
 
 from .MarketCompetition.map_model import *
 from .MarketCompetition.table_model import *

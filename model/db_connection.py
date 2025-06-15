@@ -12,3 +12,6 @@ def gsheet_ADOIH_connection() :
 
 def gsheet_MarketCompetition_connection() :
     return st.connection("MarketCompetition", type=GSheetsConnection)
+
+def gsheet_Summary_connection() :
+    return st.connection("Summary", type=GSheetsConnection)

@@ -53,4 +53,69 @@ def get_kategori_ekonomi_data() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
+
+def get_kategori_Pelajar_Mahasiswa() :
+    try:
+        return conn.query('''
+            SELECT kecamatan.nama, kecamatan.Pelajar_Mahasiswa AS "Pelajar Mahasiswa"
+            FROM kecamatan
+        ''', ttl=600)
+    except Exception as e:
+        st.error("Gagal mengambil data")
+        st.exception(e)
+        return None
     
+def get_kategori_IRT() :
+    try:
+        return conn.query('''
+            SELECT kecamatan.nama, kecamatan.IRT AS "IRT"
+            FROM kecamatan
+        ''', ttl=600)
+    except Exception as e:
+        st.error("Gagal mengambil data")
+        st.exception(e)
+        return None
+    
+def get_kategori_Nelayan_Perdagangan_Wiraswasta() :
+    try:
+        return conn.query('''
+            SELECT kecamatan.nama, kecamatan.Nelayan_Perdagangan_Wiraswasta AS "Nelayan Perdagangan Wiraswasta"
+            FROM kecamatan
+        ''', ttl=600)
+    except Exception as e:
+        st.error("Gagal mengambil data")
+        st.exception(e)
+        return None
+    
+def get_kategori_Guru_Perawat_Pengacara() :
+    try:
+        return conn.query('''
+            SELECT kecamatan.nama, kecamatan.Guru_Perawat_Pengacara AS "Guru Perawat Pengacara"
+            FROM kecamatan
+        ''', ttl=600)
+    except Exception as e:
+        st.error("Gagal mengambil data")
+        st.exception(e)
+        return None
+    
+def get_kategori_Total_Usia_Produktif() :
+    try:
+        return conn.query('''
+            SELECT kecamatan.nama, kecamatan.Total_Usia_Produktif AS "Total Usia Produktif"
+            FROM kecamatan
+        ''', ttl=600)
+    except Exception as e:
+        st.error("Gagal mengambil data")
+        st.exception(e)
+        return None
+    
+def get_kategori_Daya_Beli_Kecamatan() :
+    try:
+        return conn.query('''
+            SELECT kecamatan.nama, kecamatan.Daya_Beli_Kecamatan AS "Daya Beli/Kecamatan"
+            FROM kecamatan
+        ''', ttl=600)
+    except Exception as e:
+        st.error("Gagal mengambil data")
+        st.exception(e)
+        return None

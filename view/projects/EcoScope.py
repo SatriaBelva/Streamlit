@@ -149,4 +149,45 @@ with st.container(border=True):
     st.title("Indeks Ekonomi")
     graphIndeksEkonomi(st.session_state['kecamatan'])
 
+with st.container(border=True):
+    st.title("Indeks Ekonomi")
+    graphDayaBeli(st.session_state['kecamatan'])
+
+
+st.markdown("""
+    <style>
+        /* Header container */
+        .custom-header2-container {
+            background: linear-gradient(to right, #FD9B2A, #E30511);
+            border-radius: 8px 80px 8px 80px;
+            height: 135px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .custom-header2-subtitle {
+            font-size: 16px;
+            text-align: center;
+            width: 80%;
+            font-weight: normal;
+            margin: 0;
+            font-weight: bold;
+        }
+    </style>
+""", unsafe_allow_html=True)
+# Tampilkan header
+st.markdown("""
+    <div class="custom-header2-container">
+        <div class="custom-header2-subtitle"> 
+            (i) Indeks Ekonomi tiap kecamatan diperoleh dengan mengalikan jumlah pekerja dengan bobot jenis pekerjaannya, membaginya dengan total penduduk, lalu dinormalisasi ke skala 0–100.
+            (i) Daya beli masyarakat diperoleh dari pengeluaran per Kabupaten dibagi dengan total usia produktif di suatu Kecamatan.
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
 tableEcoscope(st.session_state['kecamatan'])
