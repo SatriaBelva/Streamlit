@@ -114,29 +114,29 @@ with colText :
         st.caption("Rekomendasi")
 
         # Pertanyaan otomatis
-        # default_query =  f"""Berdasarkan data Kecamatan {selected_kecamatan}, Desa {selected_desa} termasuk kelompok usia dominan, 
-        # tingkat pendidikan, komposisi pekerjaan, kebiasaan penggunaan internet, dan tingkat ekonomi, berikan rekomedasi paket internet 
-        # {selected_Product} yang dipilih berdasarkan usia dominan dan kebiasaan mereka, dengan harga dan benefit menyesuaikan dengan 
-        # kategori ekonomi (rendah, menengah, tinggi) namun tetap menawarkan opsi terjangkau meski untuk ekonomi tinggi, disertai dengan alasan"""
+        default_query =  f"""Berdasarkan data Kecamatan {selected_kecamatan}, Desa {selected_desa} termasuk kelompok usia dominan, 
+        tingkat pendidikan, komposisi pekerjaan, kebiasaan penggunaan internet, dan tingkat ekonomi, berikan rekomedasi paket internet 
+        {selected_Product} yang dipilih berdasarkan usia dominan dan kebiasaan mereka, dengan harga dan benefit menyesuaikan dengan 
+        kategori ekonomi (rendah, menengah, tinggi) namun tetap menawarkan opsi terjangkau meski untuk ekonomi tinggi, disertai dengan alasan"""
 
-        # # Input pertanyaan manual dari user (di bawah)
-        # # st.markdown("### Ajukan pertanyaan lain:")
-        # user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
+        # Input pertanyaan manual dari user (di bawah)
+        # st.markdown("### Ajukan pertanyaan lain:")
+        user_query = st.chat_input("Tanyakan sesuatu tentang paket internet Telkomsel...")
         
-        # qa = None
+        qa = None
         
-        # if user_query and user_query.strip() != "":
-        #     with st.spinner("Sedang mencari jawaban..."):
-        #         result = get_chatbot_response_popu(user_query)
-        #         st.markdown("### Jawaban dari pertanyaan Anda:")
-        #         st.markdown(result, unsafe_allow_html=True)
+        if user_query and user_query.strip() != "":
+            with st.spinner("Sedang mencari jawaban..."):
+                result = get_chatbot_response_popu(user_query)
+                st.markdown("### Jawaban dari pertanyaan Anda:")
+                st.markdown(result, unsafe_allow_html=True)
 
-        # # Jika user tidak mengisi apapun, tampilkan default query
-        # elif user_query is None:
-        #     with st.spinner("Sedang mencari jawaban..."):
-        #         result = get_chatbot_response_popu(default_query)
-        #         st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
-        #         st.markdown(result, unsafe_allow_html=True)
+        # Jika user tidak mengisi apapun, tampilkan default query
+        elif user_query is None:
+            with st.spinner("Sedang mencari jawaban..."):
+                result = get_chatbot_response_popu(default_query)
+                st.markdown("### Rekomendasi Paket untuk Wilayah Ini:")
+                st.markdown(result, unsafe_allow_html=True)
                 
 with st.container(border=True):            
     st.title("Pendidikan")

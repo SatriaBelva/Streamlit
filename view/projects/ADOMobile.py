@@ -150,5 +150,6 @@ with st.container(border=True):
     st.title("FB Share Reg & Youth per Kecamatan")
     graph_FBREG_FBYouth()
 
+
 tableMobile()
 refreshButton()

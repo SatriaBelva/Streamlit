@@ -1,17 +1,45 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+from controller import *
 from model import *
 
-def get_strategy_from_gsheet():
+# =================================================================================
+# BAGIAN INI HANYA UNTUK DEMONSTRASI (DATA DUMMY)
+# Ganti dengan pemanggilan fungsi asli Anda yang mengambil data dari model.
+# Data dummy ini dibuat untuk memastikan semua 4 kondisi bisa diuji.
+# =================================================================================
+# def get_Kabupaten_data():
+#     return ["Lumajang", "Jember", "Bondowoso", "Situbondo"]
+
+# def get_PENETRATION_RATE():
+#     # Asumsi: [Rendah, Rendah, Tinggi, Tinggi]
+#     return [0.25, 0.40, 0.85, 0.75]
+
+# def get_PORT_SHARE():
+#     # Asumsi: [Tinggi, Rendah, Tinggi, Rendah]
+#     return [0.80, 0.30, 0.90, 0.40]
+# =================================================================================
+# AKHIR BAGIAN DATA DUMMY
+# =================================================================================
+
+def get_strategy_content():
     """
-    Mengambil data strategi dari Google Sheet dan mengubahnya menjadi format dictionary.
+    Mengambil data strategi dari berbagai fungsi sumber dan mengubahnya 
+    menjadi format dictionary yang terstruktur.
     """
     try:
-        # Ganti 'Strategi' dengan nama sheet Anda yang sebenarnya jika berbeda
-        df_strategy = get_Strategi('Strategi') 
+        # Membuat DataFrame dari setiap fungsi get_*
+        df_strategy = pd.DataFrame({
+            'Kondisi'      : get_Kondisi_data(),
+            'Emoji'        : get_Emoji_data(),
+            'Judul'        : get_Judul_data(),
+            'Interpretasi' : get_Interpretasi_data(),
+            'Strategi'     : get_Strategi_data(),
+        })
         
         if df_strategy.empty:
-            st.error("Data strategi dari Google Sheet kosong atau gagal dimuat.")
+            st.error("Data strategi kosong atau gagal dimuat.")
             return None
 
         content = {}
@@ -27,7 +55,7 @@ def get_strategy_from_gsheet():
         
         return content
     except Exception as e:
-        st.error(f"Gagal mengambil atau memproses data strategi dari Google Sheet: {e}")
+        st.error(f"Gagal mengambil atau memproses data strategi: {e}")
         return None
 
 def determine_condition(penetration, port_share, pen_threshold=0.10, port_threshold=0.40):
@@ -53,14 +81,9 @@ def display_strategy_ui():
     """
     Fungsi utama untuk membangun dan menampilkan UI Streamlit.
     """
-    st.title("Capacity & Expansion Insight")
-    st.caption("Mengkombinasikan Penetration Rate dan Available PORT Share untuk mengklasifikasikan kondisi wilayah.")
-    st.divider()
-    
-    # Mengambil konten strategi dari Google Sheet
-    strategy_content = get_strategy_from_gsheet()
+    strategy_content = get_strategy_content()
     if not strategy_content:
-        return # Menghentikan eksekusi jika data strategi gagal dimuat
+        return
 
     try:
         df = pd.DataFrame({   
@@ -69,14 +92,32 @@ def display_strategy_ui():
             'Port Share'       : get_PORT_SHARE(),
         })
         
+        # Menyamakan nama kolom ke format standar
+        column_mapping = {
+            'KABUPATEN': 'Kabupaten',
+            'PENETRATION RATE': 'Penetration Rate',
+            'PORT SHARE': 'Port Share'
+        }
+        df.rename(columns=lambda c: column_mapping.get(c.upper(), c), inplace=True)
+
+        required_cols = ['Kabupaten', 'Penetration Rate', 'Port Share']
+        if not all(col in df.columns for col in required_cols):
+            st.error(f"DataFrame yang dibuat harus memiliki kolom: {', '.join(required_cols)}. Kolom yang ditemukan: {list(df.columns)}")
+            return
+        
+        # --- LANGKAH DIAGNOSIS 1: Tampilkan data mentah ---
+        # with st.expander("Lihat Data Mentah (Sebelum diproses)"):
+        #     st.dataframe(df)
+            
+        # Proses pembersihan data
         for col in ['Penetration Rate', 'Port Share']:
             df[col] = df[col].astype(str).str.replace(',', '.', regex=False).str.replace('%', '', regex=False)
             df[col] = pd.to_numeric(df[col], errors='coerce')
             if not df[col].empty and not df[col].isna().all() and df[col].max() > 1:
                 df[col] = df[col] / 100.0
-        
+
     except Exception as e:
-        st.error(f"Gagal memuat atau memproses data kabupaten: {e}")
+        st.error(f"Gagal memproses DataFrame: {e}")
         return
 
     col1, _ = st.columns([1, 3])
@@ -86,7 +127,12 @@ def display_strategy_ui():
             st.error("Tidak ada data kabupaten yang valid untuk ditampilkan. Periksa kembali format data sumber.")
             return
 
-        selected_kabupaten = st.selectbox("Pilih Kab/Kota", valid_kabupaten_df['Kabupaten'].unique(), label_visibility="collapsed")
+        selected_kabupaten = st.selectbox(
+            "Pilih Kab/Kota",
+            valid_kabupaten_df['Kabupaten'].unique(),
+            label_visibility="collapsed",
+            key="strategy_selectbox_main"
+        )
     
     st.write("") 
 
@@ -94,6 +140,8 @@ def display_strategy_ui():
         kab_data = df[df['Kabupaten'] == selected_kabupaten].iloc[0]
         penetration = kab_data['Penetration Rate']
         port_share = kab_data['Port Share']
+        
+
         condition_key = determine_condition(penetration, port_share)
         
         if condition_key and condition_key in strategy_content:

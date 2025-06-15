@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from controller import *
+from controller.ADOIndihome.table_controller import tableADOIH
+from controller.ADOIndihome.kondisi_controller import display_strategy_ui
 from model import *
 from PIL import Image
 import base64
@@ -99,5 +101,8 @@ with col2 :
         graph_ODP()
 
 tableADOIH()
-
-display_strategy_ui()
+with st.container(border=True):
+    st.title("Capacity & Expansion Insight")
+    st.caption("Mengkombinasikan Penetration Rate dan Available PORT Share untuk mengklasifikasikan kondisi wilayah.")
+    st.divider()
+    display_strategy_ui()

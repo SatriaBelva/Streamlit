@@ -10,8 +10,8 @@ def gsheet_ADOMobile_connection() :
 def gsheet_ADOIH_connection() :
     return st.connection("ADOIH", type=GSheetsConnection)
 
+def gsheet_kondisi_connection() :
+    return st.connection("kondisi", type=GSheetsConnection)
+
 def gsheet_MarketCompetition_connection() :
     return st.connection("MarketCompetition", type=GSheetsConnection)
-
-def gsheet_Summary_connection() :
-    return st.connection("Summary", type=GSheetsConnection)

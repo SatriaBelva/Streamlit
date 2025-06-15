@@ -1,26 +1,18 @@
 import streamlit as st
-from model import *
+from model.db_connection import gsheet_kondisi_connection
 
-Summaryconn = gsheet_Summary_connection()
-df = Summaryconn.read(ttl=2)
+kondisiconn = gsheet_kondisi_connection()
+df = kondisiconn.read(ttl=2)
 
-def get_kondisi(): 
+def get_Kondisi_data(): 
     try:
         return df['Kondisi'].tolist()
     except Exception as e:
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
-def get_Emoji(): 
-    try:
-        return df['Emoji'].tolist()
-    except Exception as e:
-        st.error("Gagal mengambil gsheet.")
-        st.exception(e)
-        return None
-    
-def get_Judul(): 
+
+def get_Judul_data(): 
     try:
         return df['Judul'].tolist()
     except Exception as e:
@@ -28,15 +20,23 @@ def get_Judul():
         st.exception(e)
         return None
     
-def get_Interpretasi(): 
+def get_Emoji_data(): 
+    try:
+        return df['Emoji'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
+
+def get_Interpretasi_data(): 
     try:
         return df['Interpretasi'].tolist()
     except Exception as e:
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
-def get_Strategi(): 
+
+def get_Strategi_data(): 
     try:
         return df['Strategi'].tolist()
     except Exception as e:
