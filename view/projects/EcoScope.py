@@ -151,7 +151,7 @@ with st.container(border=True):
 
 with st.container(border=True):
     st.title("Daya Beli Masyarakat per Kecamatan")
-    graphDayaBeli(st.session_state['kecamatan'])
+    graphDayaBeliEco(st.session_state['kecamatan'])
 
 
 st.markdown("""

@@ -6,6 +6,7 @@ from PIL import Image
 import base64
 from io import BytesIO
 
+
 # col1, col2 = st.columns(2)
 
 # with col1 :
@@ -131,8 +132,8 @@ with col1:
 
 with col2:
     with st.container(border=True):
-        st.subheader("Distribusi ARPU per Kecamatan")
-        graph_Arpu()
+        st.subheader("FB Share Reg & Youth per Kecamatan")
+        graph_FBREG_FBYouth()
 
 col3, col4 = st.columns(2)
 
@@ -147,9 +148,44 @@ with col4:
         graph_OUTLETPJP()
 
 with st.container(border=True):
-    st.title("FB Share Reg & Youth per Kecamatan")
-    graph_FBREG_FBYouth()
+    st.title("Daya Beli Masyarakat per Kabupaten")
+    graphDayaBelimob()
 
+st.markdown("""
+    <style>
+        /* Header container */
+        .custom-header2-container {
+            background: linear-gradient(to right, #FD9B2A, #E30511);
+            border-radius: 8px 80px 8px 80px;
+            height: 135px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .custom-header2-subtitle {
+            font-size: 16px;
+            text-align: center;
+            width: 80%;
+            font-weight: normal;
+            margin: 0;
+            font-weight: bold;
+        }
+    </style>
+""", unsafe_allow_html=True)
+# Tampilkan header
+st.markdown("""
+    <div class="custom-header2-container">
+        <div class="custom-header2-subtitle"> 
+            (i) Data usia produktif adalah usia 15-64 tahun dengan rincian pelajar/mahasiswa, ibu rumah tangga, nelayan, pedagang, wiraswasta, guru, perawat, dan pengacara. 
+            (i) Daya beli masyarakat diperoleh dari pengeluaran per Kabupaten dibagi dengan total usia produktif di suatu ?????.
+        </div>
+    </div>
+""", unsafe_allow_html=True)
 
 tableMobile()
 refreshButton()

@@ -22,6 +22,11 @@ def tableMobile() :
             'FB Share Youth'    : get_FacebookShareYouth_data(),
             'Status Youth'      : get_StatusYouth_data(),
             'Close COMP Youth'  : get_CloseCompetitionYouth_data(),
+            'Pelajar Mahasiswa' : get_PelajarMahasiswa_data(),
+            'IRT'                : get_IRT_data(),
+            'Nelayan, Perdagangan, Wiraswasta' : get_Nelayan_Perdagangan_Wiraswasta_data(),
+            'Total Usia Produktif' : get_Total_Usia_Produktif_data(),
+            'Total Daya Beli Masyarakat' : get_Total_Daya_Beli_Masyarakat_data(),
         }
     )
 
@@ -64,6 +69,17 @@ def tableMobile() :
                 {"headerName": "Close COMP Youth", "field": "Close COMP Youth"},
             ]
         },
+        {
+            "headerName": "Kategori Usia Produktif",
+            "headerClass": "red-header",
+            "children": [
+                {"headerName": "Pelajar Mahasiswa", "field": "Pelajar Mahasiswa"},
+                {"headerName": "IRT", "field": "IRT"},
+                {"headerName": "Nelayan, Perdagangan, Wiraswasta", "field": "Nelayan, Perdagangan, Wiraswasta"},
+            ]
+        },
+        {"headerName": "Total Usia Produktif", "field": "Total Usia Produktif"},
+        {"headerName": "Total Daya Beli Masyarakat", "field": "Total Daya Beli Masyarakat"},
     ]
 
     # Custom CSS styles
@@ -113,7 +129,12 @@ def tableMobile() :
         'Populasi', 'ARPU', 'CB',
         'Outlet PJP', 'Site',
         'FB Share REG',
-        'FB Share Youth'
+        'FB Share Youth',
+        'Pelajar Mahasiswa',
+        'IRT',
+        'Nelayan, Perdagangan, Wiraswasta',
+        'Total Usia Produktif',
+        'Total Daya Beli Masyarakat'
     ]
     kolom_desimal_koma = ['FB Share REG', 'FB Share Youth']
 

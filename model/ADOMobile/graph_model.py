@@ -69,3 +69,10 @@ def get_Site_data():
         return None
 
 
+    def get_Total_Daya_Beli_Masyarakat_data(): 
+        try:
+            return df['Total Daya Beli Masyarakat'].tolist()
+        except Exception as e:
+            st.error("Gagal mengambil gsheet.")
+            st.exception(e)
+            return None

@@ -272,4 +272,57 @@ def graph_Site():
 
 #     st.plotly_chart(fig, use_container_width=True)
 
+
+def get_color_label_dayaBelimob(value):
+    if value <= 1000000000000:
+        return 'Rendah'
+    elif 1000000000001 <= value <= 2000000000000: # Saya perbaiki logikanya menjadi <=
+        return 'Sedang'
+    else:
+        return 'Tinggi'
+
     
+def graphDayaBelimob(): # Hapus parameter 'Kabupaten' dari sini
+    # Panggil fungsi model untuk mendapatkan data sebagai list
+    kabupaten_list = get_Kabupaten_data()
+    daya_beli_list = get_Total_Daya_Beli_Masyarakat_data()
+
+    # Pastikan kedua list berhasil diambil sebelum melanjutkan
+    if kabupaten_list is None or daya_beli_list is None:
+        st.warning("Data tidak dapat ditampilkan karena gagal diambil.")
+        return # Hentikan eksekusi fungsi jika data tidak ada
+
+    # Buat DataFrame langsung dari list yang sudah ada
+    df = pd.DataFrame({
+        "Kabupaten": kabupaten_list,
+        "Daya Beli/ Kabupaten": daya_beli_list,
+    })
+
+    # Tambahkan label kategori dan warna
+    df["Kategori"] = df["Daya Beli/ Kabupaten"].apply(get_color_label_dayaBelimob)
+    warna_dict = {
+        "Rendah": "#E30511", "Sedang": "#FD9B2A", "Tinggi": "#229122"
+    }
+
+    # Bar chart dengan warna dan legend
+    bar = alt.Chart(df).mark_bar().encode(
+        x=alt.X('Kabupaten:N', sort=None, title='Kabupaten'),
+        y=alt.Y('Daya Beli/ Kabupaten:Q', title='Total Daya Beli Masyarakat'),
+        color=alt.Color('Kategori:N',
+                        scale=alt.Scale(domain=list(warna_dict.keys()), range=list(warna_dict.values())),
+                        legend=alt.Legend(orient="top", title="Kategori Daya Beli")),
+        tooltip=['Kabupaten', 'Daya Beli/ Kabupaten', 'Kategori']
+    ).properties(height=550, width=900)
+
+    text = alt.Chart(df).mark_text(
+        align='center',
+        baseline='bottom',
+        dy=-5
+    ).encode(
+        x=alt.X('Kabupaten:N'),
+        y=alt.Y('Daya Beli/ Kabupaten:Q'),
+        tooltip=['Kabupaten', 'Daya Beli/ Kabupaten', 'Kategori'],
+        text=alt.Text('Daya Beli/ Kabupaten:Q', format=",.0f")
+    )
+
+    st.altair_chart(bar + text, use_container_width=True) # Tampilkan chart (tanpa text agar tidak terlalu ramai)

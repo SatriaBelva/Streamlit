@@ -75,7 +75,7 @@ def graphIndeksEkonomi(kecamatan):
 
 
 
-def get_color_label_dayaBeli(value):
+def get_color_label_dayaBeliEco(value):
     if value <= 50000000000:
         return 'Rendah'
     elif 50000000001 <= value < 100000000000:
@@ -83,7 +83,7 @@ def get_color_label_dayaBeli(value):
     else:
         return 'Tinggi'
 
-def graphDayaBeli(kecamatan):
+def graphDayaBeliEco(kecamatan):
     if kecamatan == "Semua":
         df = pd.DataFrame({
             "Kecamatan": get_kecamatan_data()["nama"].tolist(),
@@ -96,7 +96,7 @@ def graphDayaBeli(kecamatan):
         })
 
     # Tambahkan label kategori dan warna
-    df["Kategori"] = df["Daya Beli/ Kecamatan"].apply(get_color_label_dayaBeli)
+    df["Kategori"] = df["Daya Beli/ Kecamatan"].apply(get_color_label_dayaBeliEco)
     warna_dict = {
         "Rendah": "#E30511", "Sedang": "#FD9B2A", "Tinggi": "#229122"
     }

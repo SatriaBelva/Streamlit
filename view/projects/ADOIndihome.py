@@ -100,6 +100,41 @@ with col2 :
         # graph_ODP()
         graph_ODP()
 
+st.markdown("""
+    <style>
+        /* Header container */
+        .custom-header2-container {
+            background: linear-gradient(to right, #FD9B2A, #E30511);
+            border-radius: 8px 80px 8px 80px;
+            height: 135px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .custom-header2-subtitle {
+            font-size: 16px;
+            text-align: center;
+            width: 80%;
+            font-weight: normal;
+            margin: 0;
+            font-weight: bold;
+        }
+    </style>
+""", unsafe_allow_html=True)
+# Tampilkan header
+st.markdown("""
+    <div class="custom-header2-container">
+        <div class="custom-header2-subtitle"> 
+            (i) Penetrasi menunjukkan persentase rumah tangga yang telah berlangganan IndiHome. Port menunjukkan persentase kapasitas jaringan yang masih tersedia. Kombinasi keduanya digunakan untuk mengklasifikasikan kondisi wilayah.
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
 tableADOIH()
 with st.container(border=True):
     st.title("Capacity & Expansion Insight")

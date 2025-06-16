@@ -115,3 +115,43 @@ def get_CloseCompetitionYouth_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
+
+def get_PelajarMahasiswa_data(): 
+    try:
+        return df['Pelajar Mahasiswa'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
+
+def get_IRT_data(): 
+    try:
+        return df['IRT'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
+
+def get_Nelayan_Perdagangan_Wiraswasta_data(): 
+    try:
+        return df['Nelayan, Perdagangan, Wiraswasta'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
+
+def get_Total_Usia_Produktif_data(): 
+    try:
+        return df['Total Usia Produktif'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
+
+def get_Total_Daya_Beli_Masyarakat_data(): 
+    try:
+        return df['Total Daya Beli Masyarakat'].tolist()
+    except Exception as e:
+        st.error("Gagal mengambil gsheet.")
+        st.exception(e)
+        return None
