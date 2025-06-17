@@ -17,7 +17,7 @@ def tableADOIH() :
             'Total ODP'         : get_ODP_data(),
             'PORT Available'    : get_PortAvail_data(),
             'Total PORT'        : get_TotalPort_data(),
-            'Port Share'       :get_PORT_SHARE(),
+            'Port Share'        :get_PORT_SHARE(),
         }
     )
     
@@ -65,17 +65,26 @@ def tableADOIH() :
     for kolom in numerik_kolom:
         total_row[kolom] = data[kolom].sum()
 
+    gb = GridOptionsBuilder.from_dataframe(data)
+
+    # 2. Konfigurasi kolom default agar fleksibel dan mengisi ruang
+    #    Properti 'flex: 1' adalah kunci agar kolom memenuhi lebar grid.
+    gb.configure_default_column(
+        resizable=True,
+        filterable=True,
+        sortable=True,
+        editable=False,
+    )
+    gridOptions = gb.build()
     # Tambahkan baris total
     data = pd.concat([data, pd.DataFrame([total_row])], ignore_index=True)
     AgGrid(
         data,
+        gridOptions=gridOptions,  # Gunakan gridOptions yang sudah dibuat
         custom_css=custom_css,
-        use_container_width=True,
+        use_container_width=True, # Tetap diperlukan untuk memberitahu Streamlit agar mengizinkan lebar penuh
         theme="alpine",
         allow_unsafe_jscode=True,
         enable_enterprise_modules=True,
-        reload_data=True,
-        hide_index=True,
-        autosize_all_columns=True,
-        fit_columns_on_grid_load=True
+        reload_data=True
     )

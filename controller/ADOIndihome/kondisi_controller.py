@@ -147,6 +147,7 @@ def display_strategy_ui():
         if condition_key and condition_key in strategy_content:
             content = strategy_content[condition_key]
             st.subheader(f"{content['emoji']} {selected_kabupaten}")
+            st.warning(f"Nilai untuk {selected_kabupaten} -> Penetration: {penetration:.4f}, Port Share: {port_share:.4f}")
             st.markdown("**Interpretasi:**")
             st.info(content['interpretation'])
             st.markdown("**Strategi Umum:**")
