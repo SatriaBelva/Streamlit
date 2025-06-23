@@ -51,6 +51,8 @@ import os
 import requests
 import streamlit as st
 
+# @st.cache_data
+@st.cache_resource
 def get_chatbot_response_eco(query):
     try:
         response = requests.post("https://bagusilman-fastapibotrlo.hf.space/chat/eco", json={"question": query})

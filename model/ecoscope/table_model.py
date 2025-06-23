@@ -3,6 +3,7 @@ from model.db_connection import get_connection
 
 conn = get_connection()
 
+@st.cache_data
 def get_kecamatan_data() :
     try:
         return conn.query('SELECT nama FROM kecamatan;', ttl=600)
@@ -10,7 +11,8 @@ def get_kecamatan_data() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_jumlah_penduduk_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -32,6 +34,7 @@ def get_jumlah_penduduk_data(kecamatan) :
         st.exception(e)
         return None
 
+@st.cache_data
 def get_indeks_ekonomi_table() :
     try:
         return conn.query('''
@@ -42,7 +45,8 @@ def get_indeks_ekonomi_table() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_kategori_ekonomi_data() :
     try:
         return conn.query('''
@@ -54,6 +58,7 @@ def get_kategori_ekonomi_data() :
         st.exception(e)
         return None
 
+@st.cache_data
 def get_kategori_Pelajar_Mahasiswa() :
     try:
         return conn.query('''
@@ -64,7 +69,8 @@ def get_kategori_Pelajar_Mahasiswa() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_kategori_IRT() :
     try:
         return conn.query('''
@@ -75,7 +81,8 @@ def get_kategori_IRT() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_kategori_Nelayan_Perdagangan_Wiraswasta() :
     try:
         return conn.query('''
@@ -86,7 +93,8 @@ def get_kategori_Nelayan_Perdagangan_Wiraswasta() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_kategori_Guru_Perawat_Pengacara() :
     try:
         return conn.query('''
@@ -97,7 +105,8 @@ def get_kategori_Guru_Perawat_Pengacara() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_kategori_Total_Usia_Produktif() :
     try:
         return conn.query('''
@@ -109,6 +118,7 @@ def get_kategori_Total_Usia_Produktif() :
         st.exception(e)
         return None
     
+@st.cache_data   
 def get_kategori_Daya_Beli_Kecamatan() :
     try:
         return conn.query('''

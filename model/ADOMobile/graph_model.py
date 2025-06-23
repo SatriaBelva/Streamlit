@@ -4,6 +4,7 @@ from model import *
 ADOMobileconn = gsheet_ADOMobile_connection()
 df = ADOMobileconn.read(ttl=2)
 
+@st.cache_data
 def get_Kabupaten_data(): 
     try:
         return df['KABUPATEN'].tolist()
@@ -11,7 +12,8 @@ def get_Kabupaten_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_CB_data(): 
     try:
         return df['CB'].tolist()
@@ -19,7 +21,8 @@ def get_CB_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_Populasi_data(): 
     try:
         return df['POPULASI'].tolist()
@@ -27,7 +30,8 @@ def get_Populasi_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_FBShareREG_data(): 
     try:
         return df['FB SHARE REG'].tolist()
@@ -35,7 +39,8 @@ def get_FBShareREG_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_FBShareYouth_data(): 
     try:
         return df['FB SHARE YOUTH'].tolist()
@@ -43,7 +48,8 @@ def get_FBShareYouth_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_OUTLETPJP_data(): 
     try:
         return df['OUTLET PJP'].tolist()
@@ -52,6 +58,7 @@ def get_OUTLETPJP_data():
         st.exception(e)
         return None
     
+@st.cache_data    
 def get_Arpu_data(): 
     try:
         return df['ARPU'].tolist()
@@ -59,7 +66,8 @@ def get_Arpu_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_Site_data(): 
     try:
         return df['SITE'].tolist()
@@ -69,6 +77,7 @@ def get_Site_data():
         return None
 
 
+@st.cache_data
 def get_Total_Daya_Beli_Masyarakat_data(): 
     try:
         return df['Total Daya Beli Masyarakat'].tolist()

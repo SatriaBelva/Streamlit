@@ -57,6 +57,8 @@ import os
 import requests
 import streamlit as st
 
+# @st.cache_data
+@st.cache_resource
 def get_chatbot_response_popu(query):
     try:
         response = requests.post("https://bagusilman-fastapibotrlo.hf.space/chat/popu", json={"question": query})

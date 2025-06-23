@@ -7,12 +7,13 @@ import branca.colormap as cm
 from shapely.geometry import Point
 from folium import Element
 
-
+@st.cache_data
 def map_path() :
     # shapefile_path = r"C:\Magang Grapari\Magang\streamlit\data\JemberSHP\ADMINISTRASIDESA_AR_25K.shp"
     shapefile_path = r"data/JemberSHP/ADMINISTRASIDESA_AR_25K.shp"
     return gpd.read_file(shapefile_path)
 
+@st.cache_data
 def map_path2() :
     # csv_path = "C:\Magang Grapari\Magang\streamlit\data\Dataset_PetaKabJember - Sheet1.csv"
     csv_path = "data/Dataset_PetaKabJember - Sheet1.csv"

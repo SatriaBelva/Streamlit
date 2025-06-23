@@ -2,7 +2,8 @@ import streamlit as st
 from model.db_connection import get_connection
 
 conn = get_connection()
-    
+
+@st.cache_data    
 def get_kecamatan_data() :
     try:
         return conn.query('SELECT nama FROM kecamatan;', ttl=600)
@@ -11,6 +12,7 @@ def get_kecamatan_data() :
         st.exception(e)
         return None
 
+@st.cache_data
 def get_kelurahan_data(kecamatan) :
     try:
         return conn.query(f'''

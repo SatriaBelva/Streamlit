@@ -2,7 +2,8 @@ import streamlit as st
 from model.db_connection import get_connection
 
 conn = get_connection()
-    
+
+@st.cache_data    
 def get_kecamatan_data() :
     try:
         return conn.query('SELECT nama FROM kecamatan;', ttl=600)
@@ -10,7 +11,8 @@ def get_kecamatan_data() :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_kelurahan_data(kecamatan) :
     try:
         return conn.query(f'''
@@ -23,7 +25,8 @@ def get_kelurahan_data(kecamatan) :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_belum_sekolah_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -49,7 +52,8 @@ def get_belum_sekolah_data(kecamatan) :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_SLTPSLTA_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -76,7 +80,7 @@ def get_SLTPSLTA_data(kecamatan) :
         st.exception(e)
         return None
     
-    
+@st.cache_data    
 def get_kuliah_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -102,7 +106,8 @@ def get_kuliah_data(kecamatan) :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_firstCategory_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -128,7 +133,8 @@ def get_firstCategory_data(kecamatan) :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_secondCategory_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -154,7 +160,8 @@ def get_secondCategory_data(kecamatan) :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_ThirdCategory_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -180,7 +187,8 @@ def get_ThirdCategory_data(kecamatan) :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_jumlah_penduduk_popultycs_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -202,7 +210,8 @@ def get_jumlah_penduduk_popultycs_data(kecamatan) :
         st.error("Gagal mengambil data")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_jumlahKK_data(kecamatan) :
     try:
         if kecamatan == "Semua" : 

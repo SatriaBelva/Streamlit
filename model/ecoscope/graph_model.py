@@ -3,6 +3,7 @@ from model.db_connection import get_connection
 
 conn = get_connection()
 
+@st.cache_data
 def get_indeks_ekonomi(kecamatan) :
     try:
         if kecamatan == "Semua" : 
@@ -33,7 +34,7 @@ def get_indeks_ekonomi(kecamatan) :
         st.exception(e)
         return None
     
-
+@st.cache_data
 def get_DayaBeli(kecamatan) :
     try:
         if kecamatan == "Semua" : 

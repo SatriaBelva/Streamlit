@@ -4,6 +4,7 @@ from model import *
 ADOMobileconn = gsheet_ADOIH_connection()
 df = ADOMobileconn.read(ttl=2)
 
+@st.cache_data
 def get_Kabupaten_data(): 
     try:
         return df['KABUPATEN'].tolist()
@@ -11,7 +12,8 @@ def get_Kabupaten_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_ListAktif_data(): 
     try:
         return [f"{x:.3f}" for x in df['LIS AKTIF']]
@@ -19,7 +21,8 @@ def get_ListAktif_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_ListNonAktif_data(): 
     try:
         return [f"{x:.3f}" for x in df['LIS NON AKTIF']]
@@ -27,7 +30,8 @@ def get_ListNonAktif_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_TotalHousehold_data(): 
     try:
         return [f"{x:.3f}" for x in df['TOTAL HOUSEHOLD']]
@@ -35,7 +39,8 @@ def get_TotalHousehold_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_PortAvail_data(): 
     try:
         return [f"{x:.3f}" for x in df['PORT AVAILABLE']]
@@ -43,7 +48,8 @@ def get_PortAvail_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_TotalPort_data(): 
     try:
         return [f"{x:.3f}" for x in df['TOTAL PORT']]
@@ -51,7 +57,8 @@ def get_TotalPort_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_PortUnavail_data(): 
     try:
         return [f"{x:.3f}" for x in df['PORT UNAVAILABLE']]
@@ -59,7 +66,8 @@ def get_PortUnavail_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_WifiShare_data(): 
     try:
         return df['WIFI SHARE'].tolist()
@@ -67,7 +75,8 @@ def get_WifiShare_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_ODP_data(): 
     try:
         return [f"{x:.3f}" for x in df['TOTAL ODP']]
@@ -75,7 +84,8 @@ def get_ODP_data():
         st.error("Gagal mengambil gsheet.")
         st.exception(e)
         return None
-    
+
+@st.cache_data    
 def get_CloseComp_data(): 
     try:
         return df['CLOSE COMP'].tolist()
@@ -84,6 +94,7 @@ def get_CloseComp_data():
         st.exception(e)
         return None
 
+@st.cache_data
 def get_PENETRATION_RATE(): 
     try:
         return df['PENETRATION RATE'].tolist()
@@ -92,6 +103,7 @@ def get_PENETRATION_RATE():
         st.exception(e)
         return None
 
+@st.cache_data
 def get_PORT_SHARE(): 
     try:
         return df['PORT SHARE'].tolist()
