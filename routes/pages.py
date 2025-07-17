@@ -17,13 +17,14 @@ def get_pages() :
     # === Projects Pages ===
     Populytics              = st.Page("view/projects/Populytics.py", title="Populytics", icon=":material/group:", default=True)
     EcoScope                = st.Page("view/projects/EcoScope.py", title="EcoScope", icon=":material/show_chart:")
-    # ADOIndihome             = st.Page("view/projects/ADOIndihome.py", title="ADO IH", icon=":material/cell_tower:")
-    # ADOMobile               = st.Page("view/projects/ADOMobile.py", title="ADO Mobile", icon=":material/smartphone:")
-    # MarketCompetition       = st.Page("view/projects/MarketCompetition.py", title="Market Competition", icon=":material/public:")
-    # Market_Radar    = st.Page("view/projects/Market Radar.py", title="Market Radar", icon=":material/shopping_cart:")
+    # ADOIndihome             = st.Page("view/projects/ADOIndihome.py", title="ADO IH", icon=":material/cell_tower:") # Buat SEMHAS
+    # ADOMobile               = st.Page("view/projects/ADOMobile.py", title="ADO Mobile", icon=":material/smartphone:") # Buat SEMHAS
+    # MarketCompetition       = st.Page("view/projects/MarketCompetition.py", title="Market Competition", icon=":material/public:") # Buat SEMHAS
+    # Market_Radar    = st.Page("view/projects/Market Radar.py", title="Market Radar", icon=":material/shopping_cart:") # Buat SEMHAS
     # tes_lagi_2      = st.Page("view/projects/tes_lagi_2.py", title="tes_lagi_2", icon=":material/show_chart:")
 
     return {
-        "Analisis Daerah Operasi": [Populytics, EcoScope, ADOIndihome, ADOMobile, MarketCompetition],
+        "Analisis Daerah Operasi": [Populytics, EcoScope], # Buat SEMHAS
+        # "Analisis Daerah Operasi": [Populytics, EcoScope, ADOIndihome, ADOMobile, MarketCompetition],
         # "Belajar": [Penampungan,Data,Charts,Forms,Session_State,Callback,Layout,Fragment,DB_mySQL_Conn,DB_Gsheet_Conn,Gmail_Auth]
     }
