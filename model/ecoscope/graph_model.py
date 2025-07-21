@@ -38,16 +38,18 @@ def get_indeks_ekonomi(kecamatan) :
 def get_DayaBeli(kecamatan) :
     try:
         if kecamatan == "Semua" : 
+            # Menggunakan 'indeks_ekonomi' yang ada di tabel Anda
             return conn.query('''
                 SELECT kecamatan.nama AS Kecamatan, 
-                SUM(kecamatan.Daya_Beli_Kecamatan) AS "Daya Beli/ Kecamatan" 
+                SUM(kecamatan.indeks_ekonomi) AS "Daya Beli/ Kecamatan" 
                 FROM kecamatan 
                 GROUP BY kecamatan.nama
             ''', ttl=600)
         elif kecamatan != "Semua" :
+            # Jangan lupa ganti juga di bagian ini jika ada
             return conn.query(f'''
                 SELECT kecamatan.nama AS Kecamatan, 
-                SUM(kecamatan.Daya_Beli_Kecamatan) AS "Daya Beli/ Kecamatan" 
+                SUM(kecamatan.indeks_ekonomi) AS "Daya Beli/ Kecamatan" 
                 FROM kecamatan 
                 GROUP BY kecamatan.nama
                 ''', ttl=600)
