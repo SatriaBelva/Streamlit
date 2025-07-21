@@ -242,16 +242,16 @@ def landing_page_style() :
                 <h3>EcoScope</h3>
                 <p>Analisis tingkat ekonomi untuk menunjang strategi pemasaran yang efektif</p>
             </div>
-            <div class="card">
-                <img src="data:image/png;base64,{ADOIH}" class="icon">
-                <h3>ADO IH</h3>
-                <p>Analisis infrastruktur IndiHome untuk perluasan jaringan yang tepat sasaran</p>
-            </div>
-            <div class="card">
-                <img src="data:image/png;base64,{ADOMobile}" class="icon">
-                <h3>ADO Mobile</h3>
-                <p>Analisis layanan seluler untuk strategi penetrasi pasar yang efisien</p>
-            </div>
+            # <div class="card">
+            #     <img src="data:image/png;base64,{ADOIH}" class="icon">
+            #     <h3>ADO IH</h3>
+            #     <p>Analisis infrastruktur IndiHome untuk perluasan jaringan yang tepat sasaran</p>
+            # </div>
+            # <div class="card">
+            #     <img src="data:image/png;base64,{ADOMobile}" class="icon">
+            #     <h3>ADO Mobile</h3>
+            #     <p>Analisis layanan seluler untuk strategi penetrasi pasar yang efisien</p>
+            # </div>
         </div>
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
